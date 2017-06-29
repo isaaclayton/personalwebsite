@@ -1,0 +1,22 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'layouts/base.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<h1> Isaac Layton </h1>
+
+<body>
+    <div class='HorizLinks'>
+    <ul>
+        <li><a href="{% url 'home:index' %}">About</a></li>
+        <li><a href="{% url 'home:projects' %}">Projects</a></li>
+        <li><a href="{% url 'home:index' %}">Blog</a></li>
+        <li><a href="{% url 'home:index' %}">Resume</a></li>
+    </ul>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>

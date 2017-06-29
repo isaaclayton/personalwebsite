@@ -1,0 +1,7 @@
+*.pyc
+*~
+__pycache__
+personalwebsite
+db.sqlite3
+.DS_Store
+MathJax-2.7.1/
