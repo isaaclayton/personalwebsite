@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% if latest_post_list %}
+
+    <ul>
+    {% for post in latest_post_list %}
+        <li><a href="{% url 'blog:post' post.slug%}"> {{ post.title }} </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> No polls are available </p>
+{% endif %}
+
+{% endblock %}
