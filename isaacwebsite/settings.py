@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,9 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.messages',,
     'django.contrib.staticfiles',
     'blog',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
