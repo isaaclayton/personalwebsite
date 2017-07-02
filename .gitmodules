@@ -1,0 +1,3 @@
+[submodule "external_packages/MathJax-docs"]
+	path = external_packages/MathJax-docs
+	url = https://github.com/mathjax/MathJax-docs.git

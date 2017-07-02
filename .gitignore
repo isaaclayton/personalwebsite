@@ -4,4 +4,3 @@ __pycache__
 personalwebsite
 db.sqlite3
 .DS_Store
-external_packages
