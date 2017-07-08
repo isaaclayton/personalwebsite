@@ -30,15 +30,21 @@ ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    #3rd party apps
+    'grappelli',
+    'filebrowser',
+    'tinymce',
+    'storages',
+    #self-made apps
+    'blog',
     'home.apps.HomeConfig',
+    #Start standard installed apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',,
+    'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
-    'tinymce'
 ]
 
 MIDDLEWARE = [
@@ -121,12 +127,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+#AWS Cloudfront Settings Using Boto and django-storages
+
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+    }
+
+AWS_STORAGE_BUCKET_NAME = os.environ['BUCKET_NAME']
+AWS_ACCESS_KEY_ID = os.environ['S3_ACCESS_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['S3_SECRET_KEY']
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #TinyMCE Settings
 
-TINYMCE_JS_URL = os.path.join(MEDIA_URL, "path/to/tiny_mce/tiny_mce.js")
+#TINYMCE_JS_URL = os.path.join(MEDIA_URL, "path/to/tiny_mce/tiny_mce.js")
