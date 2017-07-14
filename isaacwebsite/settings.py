@@ -135,20 +135,27 @@ STATICFILES_DIRS = [
 
 #AWS Cloudfront Settings Using Boto and django-storages
 
+"""Possible way to make pages load faster. Cons: won't immediately show updates to pages. Will keep commented until further learning
+
 AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
         'Cache-Control': 'max-age=94608000',
-    }
+    }"""
 
 AWS_STORAGE_BUCKET_NAME = os.environ['BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['S3_ACCESS_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['S3_SECRET_KEY']
+AWS_CLOUDFRONT_DOMAIN = os.environ['CLOUDFRONT_DOMAIN']
 
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+MEDIAFILES_LOCATION = 'media'
+MEDIA_ROOT = '/%s/' % MEDIAFILES_LOCATION
+MEDIA_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'isaacwebsite.custom_storages.MediaStorage'
 
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_LOCATION = 'static'
+STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
+STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
 #TinyMCE Settings
 
 #TINYMCE_JS_URL = os.path.join(MEDIA_URL, "path/to/tiny_mce/tiny_mce.js")
