@@ -157,6 +157,16 @@ STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
 STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
 
+#-----Django-filebrowser settings-----
+
+FILEBROWSER_DIRECTORY = ''
+DIRECTORY = ''
+
 #-----TinyMCE Settings-----
 
-#They'll go here when I have some!
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table, searchreplace",
+    #'theme': "advanced",
+    #'cleanup_on_startup': True,
+    #'custom_undo_redo_levels': 10,
+}
