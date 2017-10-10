@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from filebrowser.sites import site
+#from filebrowser.sites import site
 #from filebrowser.storage import S3BotoStorageMixin
 #from django.core.files.storage import default_storage
 
@@ -26,10 +26,10 @@ from filebrowser.sites import site
 #site.storage = default_storage
 
 urlpatterns = [
-    url(r'^admin/filebrowser/', include(site.urls)),
+    #url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home.urls')),
     url(r'^blog/', include('blog.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
+    #url(r'^tinymce/', include('tinymce.urls')),
 ]

@@ -32,8 +32,8 @@ ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
 INSTALLED_APPS = [
     #3rd party apps
     'grappelli',
-    'filebrowser',
-    'tinymce',
+    #'filebrowser',
+    #'tinymce',
     'storages',
     #self-made apps
     'blog',
@@ -127,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-#STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -142,31 +142,31 @@ AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
         'Cache-Control': 'max-age=94608000',
     }"""
 
-AWS_STORAGE_BUCKET_NAME = os.environ['BUCKET_NAME']
+"""AWS_STORAGE_BUCKET_NAME = os.environ['BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['S3_ACCESS_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['S3_SECRET_KEY']
-AWS_CLOUDFRONT_DOMAIN = os.environ['CLOUDFRONT_DOMAIN']
+AWS_CLOUDFRONT_DOMAIN = os.environ['CLOUDFRONT_DOMAIN']"""
 
 MEDIAFILES_LOCATION = 'media'
-MEDIA_ROOT = '/%s/' % MEDIAFILES_LOCATION
-MEDIA_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'isaacwebsite.custom_storages.MediaStorage'
+#MEDIA_ROOT = '/%s/' % MEDIAFILES_LOCATION
+#MEDIA_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, MEDIAFILES_LOCATION)
+#DEFAULT_FILE_STORAGE = 'isaacwebsite.custom_storages.MediaStorage'
 
 STATICFILES_LOCATION = 'static'
-STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
-STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
-STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
+#STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
+#STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
+#STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
 
 #-----Django-filebrowser settings-----
 
-FILEBROWSER_DIRECTORY = ''
-DIRECTORY = ''
+#FILEBROWSER_DIRECTORY = ''
+#DIRECTORY = ''
 
 #-----TinyMCE Settings-----
 
 #TINYMCE_JS_URL = '%stiny_mce/tiny_mce.js' % MEDIA_URL
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table, searchreplace",
+#TINYMCE_DEFAULT_CONFIG = {
+    #'plugins': "table, searchreplace",
     #selector': "textarea",
     #'plugins': "link",
     #'menubar': "insert",
@@ -175,4 +175,4 @@ TINYMCE_DEFAULT_CONFIG = {
     #'theme': "advanced",
     #'cleanup_on_startup': True,
     #'custom_undo_redo_levels': 10,
-}
+#}
