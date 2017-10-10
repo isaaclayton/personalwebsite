@@ -164,8 +164,14 @@ DIRECTORY = ''
 
 #-----TinyMCE Settings-----
 
+#TINYMCE_JS_URL = '%stiny_mce/tiny_mce.js' % MEDIA_URL
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table, searchreplace",
+    #selector': "textarea",
+    #'plugins': "link",
+    #'menubar': "insert",
+    #'toolbar': "link",
+    #'default_link_target': "_blank",
     #'theme': "advanced",
     #'cleanup_on_startup': True,
     #'custom_undo_redo_levels': 10,
