@@ -32,8 +32,6 @@ ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
 INSTALLED_APPS = [
     #3rd party apps
     'grappelli',
-    'filebrowser',
-    'tinymce',
     'storages',
     #self-made apps
     'blog',
@@ -156,23 +154,3 @@ STATICFILES_LOCATION = 'static'
 STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
 STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
-
-#-----Django-filebrowser settings-----
-
-FILEBROWSER_DIRECTORY = ''
-DIRECTORY = ''
-
-#-----TinyMCE Settings-----
-
-#TINYMCE_JS_URL = '%stiny_mce/tiny_mce.js' % MEDIA_URL
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table, searchreplace",
-    #selector': "textarea",
-    #'plugins': "link",
-    #'menubar': "insert",
-    #'toolbar': "link",
-    #'default_link_target': "_blank",
-    #'theme': "advanced",
-    #'cleanup_on_startup': True,
-    #'custom_undo_redo_levels': 10,
-}
