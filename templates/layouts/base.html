@@ -6,9 +6,10 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-<h1> Isaac Layton </h1>
-
 <body>
+    <h1> Isaac Layton </h1>
+    
+    <div class='menu'> 
     <div class='HorizLinks'>
     <ul>
         <li><a href="{% url 'home:index' %}">About</a></li>
@@ -17,6 +18,8 @@
         <li><a href="{% url 'home:index' %}">Resume</a></li>
     </ul>
     </div>
+    </div>
+
     {% block content %}
     {% endblock %}
 </body>

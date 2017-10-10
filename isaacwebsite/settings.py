@@ -133,7 +133,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-#AWS Cloudfront Settings Using Boto and django-storages
+#-----AWS Cloudfront Settings Using Boto and django-storages-----
 
 """Possible way to make pages load faster. Cons: won't immediately show updates to pages. Will keep commented until further learning
 
@@ -156,6 +156,23 @@ STATICFILES_LOCATION = 'static'
 STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
 STATIC_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_STORAGE = 'isaacwebsite.custom_storages.StaticStorage'
-#TinyMCE Settings
 
-#TINYMCE_JS_URL = os.path.join(MEDIA_URL, "path/to/tiny_mce/tiny_mce.js")
+#-----Django-filebrowser settings-----
+
+FILEBROWSER_DIRECTORY = ''
+DIRECTORY = ''
+
+#-----TinyMCE Settings-----
+
+#TINYMCE_JS_URL = '%stiny_mce/tiny_mce.js' % MEDIA_URL
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table, searchreplace",
+    #selector': "textarea",
+    #'plugins': "link",
+    #'menubar': "insert",
+    #'toolbar': "link",
+    #'default_link_target': "_blank",
+    #'theme': "advanced",
+    #'cleanup_on_startup': True,
+    #'custom_undo_redo_levels': 10,
+}
