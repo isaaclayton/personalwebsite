@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from django.utils import timezone
+from django.http import Http404
+from django.views.generic import TemplateView
 
 from .models import Post
 
@@ -22,3 +24,9 @@ class PostView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Post.objects.filter(pub_date__lte=timezone.now())
+    
+def staticpage(page_name):
+    try:
+        return TemplateView.as_view(template_name='{}.html'.format(page_name))
+    except TemplateDoesNotExist:
+        raise Http404

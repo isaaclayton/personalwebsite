@@ -1,5 +1,12 @@
 {% extends 'layouts/base.html' %}
 
+{%load blog_extras%}
+
+{% block extra_css %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}" />
+{% endblock %}
+
 {% block content %}
 
 <!--<h3>{{ blog.title }}</h3>
@@ -8,6 +15,8 @@
 
 <p> {{ blog.text }} </p>-->
 
-<p>{{post.text}}</p>
+{% with "blogposts/"|addstr:post.title|addstr:".html" as post_html%}
+{% include post_html %}
+{% endwith %}
 
 {% endblock %}
