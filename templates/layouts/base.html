@@ -3,23 +3,28 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'layouts/base.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <script type="text/javascript" src="d3/d3.min.js"></script>
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-    <h1> Isaac Layton </h1>
+    <div id='big_name'> Isaac Layton </div>
     
-    <div class='menu'> 
-    <div class='HorizLinks'>
-    <ul>
-        <li><a href="{% url 'home:index' %}">About</a></li>
-        <li><a href="{% url 'home:projects' %}">Projects</a></li>
-        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
-        <li><a href="{% url 'home:index' %}">Resume</a></li>
-    </ul>
+    <div class='menu'>
+    <nav>
+        <a href="{% url 'home:index' %}">About</a>
+        <a href="{% url 'projects:project_list' %}">Projects</a>
+        <a href="{% url 'blog:post_list' %}">Blog</a>
+        <a href="{% static 'pdf_files/resume.pdf' %}" target="_blank", rel="noopener noreferrer">Resume</a>
+    </nav>
     </div>
-    </div>
-
+    <br>
+    <hr>
+    <script type="text/javascript">
+    d3.selectAll("circle.a").style("fill", "red").attr("cx", 100);
+    </script>
+    <main>
     {% block content %}
     {% endblock %}
+    </main>
 </body>

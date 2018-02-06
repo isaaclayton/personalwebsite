@@ -1,22 +1,23 @@
 {% extends 'layouts/base.html' %}
 
-{%load blog_extras%}
+{%load template_extras%}
 
 {% block extra_css %} 
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
 {% endblock %}
 
 {% block content %}
 
-<!--<h3>{{ blog.title }}</h3>
+<h1 class=post_title>{{ post.title }}</h1>
 
-{% if error_message %}<p><strong> {{ error_message }} </strong></p> {% endif %}
+<!--{% if error_message %}<p><strong> {{ error_message }} </strong></p> {% endif %}
 
 <p> {{ blog.text }} </p>-->
 
 {% with "blogposts/"|addstr:post.title|addstr:".html" as post_html%}
-{% include post_html %}
+{%include_fallback post_html "utils/blank.html"%}
 {% endwith %}
 
 {% endblock %}

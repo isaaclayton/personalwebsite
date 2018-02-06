@@ -32,13 +32,12 @@ ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
 INSTALLED_APPS = [
     #3rd party apps
     'grappelli',
-    #'filebrowser',
-    #'tinymce',
     'storages',
     #self-made apps
     'blog',
-    #'blogposts',
-    'home.apps.HomeConfig',
+    'utils',
+    'home',
+    'projects',
     #Start standard installed apps
     'django.contrib.admin',
     'django.contrib.auth',

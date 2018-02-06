@@ -1,19 +1,17 @@
 {% extends 'layouts/base.html' %}
 
+{%load template_extras%}
+
 {% block extra_css %}
 
-<!--{% load static %} --->
+{% load static %}
 
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'home/jupyter.css' %}" />--->
+ <link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}">
 
 {% endblock %}
 
 {% block content %}
 
-<h2> Welcome </h2>
-
-<p>
-This is my website.
-</p>
+{%include_fallback "home/about.html" "utils/blank.html"%}
 
 {% endblock %}

@@ -1,14 +1,25 @@
 {% extends 'layouts/base.html' %}
 
+{% block extra_css %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
+{% endblock %}
+
 {% block content %}
 {% if latest_post_list %}
 
-    <ul>
-    {% for post in latest_post_list %}
-        <li><a href="{% url 'blog:post' post.slug%}"> {{ post.title }} </a>
-        </li>
-    {% endfor %}
-    </ul>
+<div class=post_list>
+    <nav>
+        <ul>
+        {% for post in latest_post_list %}
+            <li>
+                <h3><a href="{% url 'blog:post' post.slug%}"> {{ post.title }} </a></h3>
+                <p class='pub_date'> {{ post.get_date }} </p>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+</div>
 {% else %}
     <p> No blog posts are available </p>
 {% endif %}

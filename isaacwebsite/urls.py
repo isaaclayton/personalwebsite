@@ -26,10 +26,9 @@ from django.contrib import admin
 #site.storage = default_storage
 
 urlpatterns = [
-    #url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home.urls')),
     url(r'^blog/', include('blog.urls')),
-    #url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^projects/', include('projects.urls')),
 ]

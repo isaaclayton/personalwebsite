@@ -1,0 +1,99 @@
+.App {
+
+}
+
+#wrapper {
+    position:absolute;
+    height:100%;
+    width:100%;
+}
+
+.panels {
+    position:relative;
+    z-index:1000;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+#header_wrapper {
+  top:0px;
+  left:0px;
+}
+#App-header {
+  position: fixed;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #060CE9;
+  /*font-family: 'Gyparody';*/
+  z-index:-99;
+  color: white;
+}
+
+#App-header h1{
+    top: 20vh;
+    position: relative;
+    font-size: 3.5em;
+    margin:10vh 10vw;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.jeopardy-word {
+    font-family: 'Gyparody';
+    font-size: 30px;
+    letter-spacing: 0.0725em;
+}
+
+#jeopardy-intro {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    background-image: url('./jeopardy_intro.gif');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index:-98;
+}
+
+#bodyWrapper {
+    background-color: whitesmoke;
+    margin-top: 100vh;
+    padding-top: 25vh;
+    padding-left: 25vw;
+    padding-right: 25vw;
+    padding-bottom: 25vh;
+}
+
+.introduction {
+    position: relative;
+    /*font-family: 'PT Sans', serif;*/
+    font-size:3em;
+}
+
+@font-face {
+  font-family: 'Gyparody';
+  src: url('./font_files/gyparody-webfont.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url('./font_files/gyparody-webfont.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}  
+
+@font-face {
+    font-family: 'Mavericks';
+    src: url('./font_files/NBAMAVER.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./font_files/NBAMAVER.TTF') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}

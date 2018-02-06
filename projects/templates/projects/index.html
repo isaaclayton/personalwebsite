@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block extra_css %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
+{% endblock %}
+
+{% block content %}
+{% if latest_project_list %}
+
+<div class=post_list>
+    <nav>
+        <ul>
+        {% for project in latest_project_list %}
+            <li>
+                <h3><a href="{% url 'projects:project' project.slug%}"> {{ project.title }} </a></h3>
+                <p class='pub_date'> {{ project.get_date }} </p>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+</div>
+{% else %}
+    <p> No projects are available yet. Check again soon! </p>
+{% endif %}
+
+{% endblock %}
