@@ -4,7 +4,6 @@ import React, {Component} from 'react'
 export default class Point extends Component {
     
     render() {
-        const boxSize = 50;
         return (
             <circle 
                 onMouseOver={()=>this.props.mouseIn(this.props)}

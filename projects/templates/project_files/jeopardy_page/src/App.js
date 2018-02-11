@@ -4,16 +4,21 @@ import React, {
 import './App.css';
 import {
     csv
-} from 'd3-request'
-import WordFreq from './WordFreq'
+} from 'd3-request';
+import WordFreq from './WordFreq';
+import USMap from './USMap';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {clue_words: []}
+        this.onResize = this.onResize.bind(this);
+        this.state = {clue_words: [], state_winnings:[], screenWidth: 1000, screenHeight: 500}
     }
     componentWillMount() {
-        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
+        
+        let clue_csv = require('./data_files/clue_word_list.csv');
+       
+        csv(clue_csv, (error, data) => {
             if(error) {
                 this.setState({loadError: true});
             }
@@ -28,44 +33,61 @@ class App extends Component {
                 clue_words: data
             })
         })
-        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
-            if(error) {
-                this.setState({loadError: true});
+        
+        let winnings_csv = require('./data_files/state_mean_winnings.csv');
+        let statelines_json = require('./data_files/statelines.json');
+        
+        csv(winnings_csv, data =>
+                this.setState({state_winnings: join(data, statelines_json.features, 'state', 'NAME', 
+                    function(state, winnings) {
+                        let property = Object.assign({}, state.properties);
+                        property.winnings = (winnings !== undefined) ? winnings.winnings : 0;
+                        property.longitude = (winnings !== undefined) ? winnings.longitude : 0;
+                        property.latitude = (winnings !== undefined) ? winnings.latitude : 0;
+                        return {
+                            type: state.type,
+                            geometry: state.geometry,
+                            properties: property
+                        };
+                }
+                )}));
+        
+            function join(winnings, state, winningsKey, stateKey, select) {
+                
+            const win_len = winnings.length;
+            const state_len = state.length;
+            let lookupIndex = [];
+            let output = [];
+            for (let i = 0; i < win_len; i++) {
+                let row = winnings[i];
+                lookupIndex[row[winningsKey]] = row;
             }
-            for (let key in data) {
-                for (let i=1; i<35; i++) {
-                    data[key]['season'+i] = +data[key]['season'+i]
-                    data[key][`season${i}_total`] = +data[key][`season${i}_total`]
+            for (let j = 0; j < state_len; j++) {
+                let y = state[j];
+                let x = lookupIndex[y.properties[stateKey]];
+                output.push(select(y, x))
             }
-            }
-
-            this.setState({
-                clue_words: data
-            })
-        })
-        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
-            if(error) {
-                this.setState({loadError: true});
-            }
-            for (let key in data) {
-                for (let i=1; i<35; i++) {
-                    data[key]['season'+i] = +data[key]['season'+i]
-                    data[key][`season${i}_total`] = +data[key][`season${i}_total`]
-            }
-            }
-
-            this.setState({
-                clue_words: data
-            })
-        })
+            return output;
+        }
+        
+    }
+    
+    componentDidMount() {
+        window.addEventListener('resize', this.onResize, false)
+        this.onResize()
+    }
+    
+    onResize() {
+        this.setState({ screenWidth: window.innerWidth,
+                      screenHeight: window.innerHeight - 70})
     }
     render() {
-    if (this.state.loadError) {
-      <div>couldn't load file</div>;
+    /*if (this.state.loadError) {
+      <div>couldn't load file</div>
     }
     if (!this.state.clue_words) {
-      <div />;
-    }
+      <div/>
+    }*/
     let clue_words = [];
     const numWords = 6
     if (this.state.clue_words.length >0) {
@@ -93,12 +115,16 @@ class App extends Component {
                         <div className='jeopardy-word'> Jeopardy!</div>
                             <p>An analysis of the gameshow<br/> by Isaac Layton</p>
                         </div>
-                    <p> &emsp; Jeopardy was a daily ritual in my family. We would gather around the TV and shout "Daily Double!", join Alex in thanking Johnny, and make up rules like "Don't say the answer until the clue is fully read" (my brother and I were quick readers). </p>
+                    <p> &emsp; Jeopardy was a daily ritual in my family. We would gather around the TV and shout "Daily Double!", join Alex Trebek in thanking <a href='https://en.wikipedia.org/wiki/Johnny_Gilbert'>Johnny</a>, and make up rules like "Don't say the answer until the clue is fully read" (my brother and I were quick readers). </p>
                     <p>
                     </p>
                     <div>
                         {clue_words}
                     </div>
+                    <div>
+                        <USMap data={this.state.state_winnings} size={[this.state.screenWidth/2,this.state.screenHeight/1.5]}/>
+                    </div>
+
                 </div> 
             </div>
     );

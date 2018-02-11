@@ -10,16 +10,12 @@ export default class WordFreq extends Component {
     
     constructor(props) {
         super(props);
-        //this.mouseIn = this.mouseIn.bind(this);
-        //this.mouseOut = this.mouseOut.bind(this);
         this.state =  {hover: false, data: {season: 0, ratio: 0, word_count: 0, season_count: 0, margins:this.props.margins, size: this.props.size}}
     }
     
     
     mouseIn(d) {
-        if (this.state.data !== d) {
-            this.setState({hover: true, data: d});
-        }
+        this.setState({hover: true, data: d});
     }
     
     mouseOut() {
@@ -48,7 +44,29 @@ export default class WordFreq extends Component {
           {this.props.data.map((d,i)=><Point key={i} word_count = {d.word_count} season_count = {d.season_count} margins = {this.props.margins} size={this.props.size} season={d.season} ratio={d.ratio} xScale={xScale} yScale={yScale} mouseOut={this.mouseOut.bind(this)} mouseIn={this.mouseIn.bind(this)}/>)}
           <path d={countLine(this.props.data)} fill={'none'} stroke={'#060CE9'} strokeWidth={2}> </path>
         <text x= {this.props.size[0]/3} y= {this.props.margins[1]/2} style={{fontSize: `${this.props.margins[1]/3}px`}}>{this.props.data[0].name}</text>
-        <ToolTip value={this.state.data} style_={toolTipStyle}/>
+        <ToolTip data={this.state.data} style_={toolTipStyle} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[120,50]} size={this.props.size}/>
       </svg>);
   }
+}
+
+function toolTipText({width, height, data}) {
+    return (
+        <g>
+        <text style={{fontSize:height/4}} x={width/15} y={height/3.5}> Occurs {data.word_count} times </text>
+        <text style={{fontSize:height/4}} x={width/15} y={2*height/3.5}>in the {data.season_count} words </text>
+        <text style={{fontSize:height/4}} x={width/15} y={3*height/3.5}> of season {data.season} </text>
+        </g>
+    )
+}
+
+function toolTipCoords({width, height, data, size}){
+    let x = (typeof data.xScale !== 'undefined') && (typeof data.margins !== 'undefined') ? data.xScale(data.season) - 1.05*width : 0;
+    let y = (typeof data.yScale !== 'undefined') ? data.yScale(data.ratio) - 1.2*height : 0;
+    if (y<data.margins[1]/2) {
+        y += 1.4*height;
+    }
+    if (x<0) {
+        x += width;
+    }
+    return [x,y];
 }
