@@ -28,6 +28,36 @@ class App extends Component {
                 clue_words: data
             })
         })
+        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
+            if(error) {
+                this.setState({loadError: true});
+            }
+            for (let key in data) {
+                for (let i=1; i<35; i++) {
+                    data[key]['season'+i] = +data[key]['season'+i]
+                    data[key][`season${i}_total`] = +data[key][`season${i}_total`]
+            }
+            }
+
+            this.setState({
+                clue_words: data
+            })
+        })
+        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
+            if(error) {
+                this.setState({loadError: true});
+            }
+            for (let key in data) {
+                for (let i=1; i<35; i++) {
+                    data[key]['season'+i] = +data[key]['season'+i]
+                    data[key][`season${i}_total`] = +data[key][`season${i}_total`]
+            }
+            }
+
+            this.setState({
+                clue_words: data
+            })
+        })
     }
     render() {
     if (this.state.loadError) {
@@ -37,7 +67,7 @@ class App extends Component {
       <div />;
     }
     let clue_words = [];
-    const numWords = 7
+    const numWords = 6
     if (this.state.clue_words.length >0) {
     for (let j=0; j<numWords; j++) {
         let arr = []

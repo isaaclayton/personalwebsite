@@ -40,6 +40,7 @@ export default class WordFreq extends Component {
       const countLine = line().x(d=> xScale(d.season)).y(d=>yScale(d.ratio));
       const toolTipStyle = {
           visibility: this.state.hover ? 'visible' : 'hidden',
+          opacity: 0.9
         }
       return (
           <svg height={this.props.size[1]} width={this.props.size[0]}>
