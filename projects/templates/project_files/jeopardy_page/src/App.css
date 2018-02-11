@@ -1,23 +1,9 @@
-.App {
-
-}
 
 #wrapper {
     position:absolute;
     height:100%;
     width:100%;
 }
-
-.panels {
-    position:relative;
-    z-index:1000;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 #header_wrapper {
   top:0px;
   left:0px;
@@ -36,8 +22,17 @@
 #App-header h1{
     top: 20vh;
     position: relative;
+    font-size: 10vmin;
+    margin:10vh 10vw;
+    padding-bottom: 20vh;
+}
+
+#App-header h2{
+    padding-top: 10vh;
+    position: relative;
     font-size: 3.5em;
     margin:10vh 10vw;
+    font-stretch: ultra-expanded;
 }
 
 .App-title {
@@ -48,15 +43,17 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.title {
+    text-align: center;
 }
 
 .jeopardy-word {
     font-family: 'Gyparody';
-    font-size: 30px;
+    font-size:15vmin;
     letter-spacing: 0.0725em;
+    color: gray; 
+    margin-bottom: 5vh;
+    margin-top: 10vh;
 }
 
 #jeopardy-intro {
@@ -72,18 +69,15 @@
 }
 
 #bodyWrapper {
-    background-color: whitesmoke;
+    background-color: white;
     margin-top: 100vh;
-    padding-top: 25vh;
-    padding-left: 25vw;
-    padding-right: 25vw;
+    padding-top: 10vh;
+    padding-left: 20vw;
+    padding-right: 20vw;
     padding-bottom: 25vh;
-}
-
-.introduction {
-    position: relative;
-    /*font-family: 'PT Sans', serif;*/
-    font-size:3em;
+    line-height: 200%;
+    font-size:2.5vh;
+    font-family: 'PT Sans', serif;
 }
 
 @font-face {
@@ -97,3 +91,15 @@
     src: url('./font_files/NBAMAVER.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
     url('./font_files/NBAMAVER.TTF') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
+
+div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 150px;
+            height: 40px;
+            padding: 2px;
+            font: 12px;
+            background: lightsteelblue;
+            border: 0px;
+            pointer-events: none;
+        }

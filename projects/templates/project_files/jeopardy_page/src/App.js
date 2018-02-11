@@ -2,29 +2,30 @@ import React, {
     Component
 } from 'react';
 import './App.css';
-import logo from './logo.svg'
 import {
     csv
 } from 'd3-request'
-import Word_freq from './Word_freq'
+import WordFreq from './WordFreq'
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {clue_words: []}
     }
     componentWillMount() {
-        csv('/data_files/clue_word_list.csv', (error, data) => {
+        csv('https://raw.githubusercontent.com/isaaclayton/personalwebsite/master/projects/templates/project_files/jeopardy_page/src/data_files/clue_word_list.csv', (error, data) => {
             if(error) {
                 this.setState({loadError: true});
             }
-            let data_copy = Object.assign({}, data)
-            for (let i=1; i<35; i++) {
-                data_copy['season'+i] = +data_copy['season'+i]
-                data_copy[`season${i}_total`] = +data_copy[`season${i}_total`]
+            for (let key in data) {
+                for (let i=1; i<35; i++) {
+                    data[key]['season'+i] = +data[key]['season'+i]
+                    data[key][`season${i}_total`] = +data[key][`season${i}_total`]
             }
+            }
+
             this.setState({
-                clue_words: data_copy
+                clue_words: data
             })
         })
     }
@@ -35,11 +36,18 @@ class App extends Component {
     if (!this.state.clue_words) {
       <div />;
     }
-    let clue_words = {x: [], y: []}
-    for (let i=1; i<35; i++) {
-        clue_words.x.push(i)
-        clue_words.y.push(this.state.clue_words['season'+i][0])
+    let clue_words = [];
+    const numWords = 7
+    if (this.state.clue_words.length >0) {
+    for (let j=0; j<numWords; j++) {
+        let arr = []
+            for (let i=1; i<35; i++) {
+        arr.push({season: i, word_count: this.state.clue_words[j]['season'+i], season_count: this.state.clue_words[j][`season${i}_total`], ratio: this.state.clue_words[j]['season'+i]/this.state.clue_words[j][`season${i}_total`],
+                 name: this.state.clue_words[j]['word']});
     }
+    clue_words.push(<WordFreq key={j} margins={[50,60]} data={arr} size={[250,250]}/>)
+    }
+}
         return (
             <div id = 'wrapper'>
                 <link href = "https://fonts.googleapis.com/css?family=PT+Sans" rel = "stylesheet" />
@@ -50,25 +58,16 @@ class App extends Component {
                 </header> 
                 </div>
                 <div id ='bodyWrapper'>
-                    <div className = 'introduction' >
-                        <p> If you answered "Are You Smarter Than a Fifth Grader" by </p> 
-                    </div>
+                        <p> &emsp; If you guessed "Are You Smarter Than a Fifth Grader", hosted by Jeff Foxworthy, <a href='http://www.jefffoxworthy.com/jokes'>you might be a redneck</a>, but you also might want to reconsider your answer. The correct answer is... </p>
+                        <div className='title'>
+                        <div className='jeopardy-word'> Jeopardy!</div>
+                            <p>An analysis of the gameshow<br/> by Isaac Layton</p>
+                        </div>
+                    <p> &emsp; Jeopardy was a daily ritual in my family. We would gather around the TV and shout "Daily Double!", join Alex in thanking Johnny, and make up rules like "Don't say the answer until the clue is fully read" (my brother and I were quick readers). </p>
+                    <p>
+                    </p>
                     <div>
-                        {
-
-    <div style={{
-      background: '#fff',
-      borderRadius: '3px',
-      boxShadow: '0 1 2 0 rgba(0,0,0,0.1)',
-      margin: 12,
-      padding: 24,
-      width: '350px'
-    }}>
-      <h1>Birth and death rates of selected countries</h1>
-      <h2>per 1,000 inhabitants</h2>
-      <Word_freq data={clue_words}/>
-    </div>
-  }
+                        {clue_words}
                     </div>
                 </div> 
             </div>
