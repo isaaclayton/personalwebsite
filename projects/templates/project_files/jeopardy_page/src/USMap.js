@@ -22,7 +22,7 @@ export default class USMap extends Component {
     }
     
     mouseOut() {
-        this.setState({hover: false});
+        this.setState({hover: false, hoverID: -1});
     }
     
     render() {
@@ -44,7 +44,8 @@ export default class USMap extends Component {
         .map((d,i) => <path
             key={'path' + i}
             d={pathGenerator(d)}
-            onMouseEnter={()=> this.mouseIn(d,i)}
+            onMouseOver={()=> this.mouseIn(d,i)}
+            onMouseOut={()=> this.mouseOut()}
             style={{fill: this.state.hoverID==i ? '#6666FF' : stateColor(d.properties.winnings), 
                   stroke: 'black', strokeOpacity: 0.5}}
             className='countries'
