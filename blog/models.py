@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 #from .admin import MyModelAdmin
 
 class Post(models.Model):
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40)
     #body = "/blogposts/{}.html".format(title)
