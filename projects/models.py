@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils import timezone
-from datetime import datetime  
+from datetime import datetime
+from django.contrib.auth.models import User
 #from .admin import MyModelAdmin
 
 class Project(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey(User, models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40)
     #body = "/blogposts/{}.html".format(title)
