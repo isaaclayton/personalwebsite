@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'storages',
     #self-made apps
     'blog',
-    'home.apps.HomeConfig',
+    'utils',
+    'home',
+    'projects',
     #Start standard installed apps
     'django.contrib.admin',
     'django.contrib.auth',
