@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY_SETTING']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
+ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], 'isaaclayton.com', 'www.isaaclayton.com']
 
 # Application definition
 
