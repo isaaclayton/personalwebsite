@@ -21,3 +21,9 @@
 {% endwith %}
 
 {% endblock %}
+
+{%if not debug%}
+    {%block ga%}
+        {% include "templates/layouts/scripts/ga.html" with ga_tracking_id=ga_tracking_id %}
+    {%endblock%}
+{%endif%}

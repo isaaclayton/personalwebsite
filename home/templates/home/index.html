@@ -15,3 +15,9 @@
 {%include_fallback "home/about.html" "utils/blank.html"%}
 
 {% endblock %}
+
+{%if not debug%}
+    {%block ga%}
+        {% include "templates/layouts/scripts/ga.html" with ga_tracking_id=ga_tracking_id %}
+    {%endblock%}
+{%endif%}
