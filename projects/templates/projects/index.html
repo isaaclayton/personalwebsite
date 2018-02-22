@@ -26,8 +26,6 @@
 
 {% endblock %}
 
-{%if not debug%}
-    {%block ga%}
-        {% include "layouts/scripts/ga.html" with ga_tracking_id=ga_tracking_id %}
-    {%endblock%}
-{%endif%}
+{% if GA_TRACKING_ID %}
+  {% include "layouts/scripts/ga.html" %}
+{% endif %}

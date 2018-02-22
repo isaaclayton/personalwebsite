@@ -3,4 +3,10 @@ from django.conf import settings
 
 
 def ga_tracking_id(request):
-    return {'ga_tracking_id': settings.GA_TRACKING_ID}
+    """
+    Receive Google Analytics tracking ID
+    """
+    ga_track_id = getattr(settings, 'GA_TRACKING_ID', False)
+    if not settings.DEBUG and ga_track_id:
+        return {'GA_TRACKING_ID': ga_track_id}
+    return {}
