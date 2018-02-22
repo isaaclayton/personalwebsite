@@ -26,6 +26,8 @@
 
 {% endblock %}
 
+{% block ga %}
 {% if GA_TRACKING_ID %}
   {% include "layouts/scripts/ga.html" %}
 {% endif %}
+{% endblock %}
