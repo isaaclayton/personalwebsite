@@ -16,8 +16,8 @@
 
 {% endblock %}
 
-{%if not debug%}
+{%if not DEBUG%}
     {%block ga%}
-        {% include "templates/layouts/scripts/ga.html" with ga_tracking_id=ga_tracking_id %}
+        {% include "layouts/scripts/ga.html" with ga_tracking_id=GA_TRACKING_ID %}
     {%endblock%}
 {%endif%}
