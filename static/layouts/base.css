@@ -1,7 +1,6 @@
 h1 {
     vertical-align: middle;
     letter-spacing: 2px;
-    font-size: 2em;
 }
 
 h2 {
@@ -15,11 +14,12 @@ h3 {
 }
 
 body {
-    margin: 8% 25%;
+    margin: 8% 25% 3% 25%;
     text-align: left;
     vertical-align: middle;
     font-family: 'PT Sans', serif;
     line-height: 200%;
+    width: 50%;
 }
 
 .menu {
@@ -64,4 +64,30 @@ a:active {
 
 img {
     width: 100%;
+}
+
+#body_wrapper {
+    min-height: 100%;
+    padding-bottom: 5%
+}
+
+footer {
+    position: relative;
+    margin-top: -20%;
+    padding-top: 10%;
+    height: 5%;
+    text-align: center;
+    line-height: 50%;
+    clear: both;
+}
+
+@media screen and (max-width: 1020px) {
+    
+    body {
+        margin: 15% 5% 3% 5%;
+        width: 90%;     
+    }
+    #body_wrapper {
+        min-height: 95%;
+    }
 }

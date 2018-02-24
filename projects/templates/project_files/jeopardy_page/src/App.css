@@ -1,4 +1,3 @@
-
 #wrapper {
     position:absolute;
     height:100%;
@@ -80,6 +79,10 @@
     font-family: 'PT Sans', serif;
 }
 
+.graphics {
+    
+}
+
 @font-face {
   font-family: 'Gyparody';
   src: url('./font_files/gyparody-webfont.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
@@ -103,3 +106,17 @@ div.tooltip {
             border: 0px;
             pointer-events: none;
         }
+
+@media screen and (max-width: 1020px) {
+    
+    #bodyWrapper {
+        padding-left: 4vw;
+        padding-right: 4vw;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .graphics {
+        width: 80%;
+        margin: 0 10%;
+    }
+}

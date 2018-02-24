@@ -2,14 +2,6 @@
 
 {%load template_extras%}
 
-{% block extra_css %}
-
-{% load static %}
-
- <link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}">
-
-{% endblock %}
-
 {% block content %}
 
 {%include_fallback "home/about.html" "utils/blank.html"%}

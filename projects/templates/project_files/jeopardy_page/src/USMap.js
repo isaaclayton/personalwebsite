@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {geoAlbersUsa, geoPath} from 'd3-geo';
-import {extent, min} from 'd3-array';
+import {extent} from 'd3-array';
 import {scaleQuantize} from 'd3-scale';
 import colorbrewer from 'colorbrewer';
 import ToolTip from './ToolTip'
@@ -30,6 +30,9 @@ export default class USMap extends Component {
         if (this.props.size[0]>this.props.size[1]) {
             scaleFactor = 0.003;
         }
+        else if (this.props.size[0]/this.props.size[1] < 0.44) {
+            scaleFactor = 0.0015
+        }
         const projection = geoAlbersUsa()
         .scale(this.props.size[0]*this.props.size[1]*scaleFactor)
         .translate([this.props.size[0]*0.5,this.props.size[1]*0.5])
@@ -46,7 +49,7 @@ export default class USMap extends Component {
             d={pathGenerator(d)}
             onMouseOver={()=> this.mouseIn(d,i)}
             onMouseOut={()=> this.mouseOut()}
-            style={{fill: this.state.hoverID==i ? '#6666FF' : stateColor(d.properties.winnings), 
+            style={{fill: this.state.hoverID===i ? '#6666FF' : stateColor(d.properties.winnings), 
                   stroke: 'black', strokeOpacity: 0.5}}
             className='countries'
         />)

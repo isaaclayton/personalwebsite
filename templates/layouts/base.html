@@ -1,28 +1,36 @@
 {% load static %}
 
 <head>
+    <title> Isaac Layton </title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="{% static 'layouts/base.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-    <div id='big_name'> Isaac Layton </div>
+    <div id='body_wrapper'>
+        <div id='big_name'> Isaac Layton </div>
     
-    <div class='menu'>
-    <nav>
-        <a href="{% url 'home:index' %}">About</a>
-        <a href="{% url 'projects:project_list' %}">Projects</a>
-        <a href="{% url 'blog:post_list' %}">Blog</a>
-        <a href="{% static 'pdf_files/resume.pdf' %}">Resume</a>
-    </nav>
+        <div class='menu'>
+            <nav>
+                <a href="{% url 'home:index' %}">About</a>
+                <a href="{% url 'projects:project_list' %}">Projects</a>
+                <a href="{% url 'blog:post_list' %}">Blog</a>
+                <a href="{% static 'pdf_files/resume.pdf' %}">Resume</a>
+            </nav>
+        </div>
+        <br>
+        <hr>
+        <main>
+            {% block content %}
+            {% endblock %}
+            {% block ga %}
+            {% endblock %}
+        </main>
     </div>
-    <br>
-    <hr>
-    <main>
-    {% block content %}
-    {% endblock %}
-    {% block ga %}
-    {% endblock %}
-    </main>
+    <footer>
+        <p>&copy; Isaac Layton 2018.</p>
+        <p> Contact me at isaac@isaaclayton.com</p>
+    </footer>
 </body>
