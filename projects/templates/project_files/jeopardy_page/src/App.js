@@ -131,7 +131,7 @@ class App extends Component {
                     <p>The first problem could've been solved by running the function in my AWS server using a <a href='https://www.rackaid.com/blog/linux-screen-tutorial-and-how-to/'>Linux screen</a>, but that would've still left the second problem. I ended up appending each error URL to a list variable so that I could diagnose the problems easier. This error list was then <a href='https://wiki.python.org/moin/UsingPickle'>pickled</a> to ensure that I could reference it once the function finished. Once the errors in the extraction function were fixed, all I had to do was run the generator function on the error list instead of the complete episode list. This worked by making the list smaller and smaller until I had collected all episodes.
                     </p>
                     <h2>Data Exploration</h2>
-                    <p>Having gathered the data, </p>
+                    <p>Having gathered the data, I got to have some fun and make discoveries! Looking at </p>
                     <div className='graphics'>
                         {clue_words}
                     </div>
