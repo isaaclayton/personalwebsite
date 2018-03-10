@@ -13,7 +13,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const BundleTracker = require('webpack-bundle-tracker');
-const publicPath = "/static/jeopardy_bundles/";
+const publicPath = "https://d18grwbif3izzf.cloudfront.net/static/jeopardy_bundles/";
 const cssFilename = 'css/[name].[contenthash:8].css';
 
 // Webpack uses `publicPath` to determine where the app is being served from.
