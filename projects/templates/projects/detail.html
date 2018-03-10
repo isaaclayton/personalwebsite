@@ -1,6 +1,8 @@
 {%load template_extras%}
 
-{%include 'project_files/jeopardy/index.html'%}
+{% with "project_files/"|addstr:project.slug|addstr:"/index.html" as project_html%}
+{%include_fallback project_html "utils/blank.html"%}
+{% endwith %}
 
 {% block ga %}
 {% if GA_TRACKING_ID %}
