@@ -10,10 +10,12 @@ export default class USMap extends Component {
     
     constructor(props) {
         super(props);
+        const x = this.props.x;
         this.state =  {hover: false, 
                        hoverID: -1,
-                       data: {properties : {winnings: 0, latitude: 40.1135, longitude: -111.8535}, size: this.props.size}
+                       data: {properties : {latitude: 40.1135, longitude: -111.8535}, size: this.props.size}
                       }
+        this.state.data.properties[x] = 0;
     }
     
     
@@ -37,7 +39,7 @@ export default class USMap extends Component {
         .scale(this.props.size[0]*this.props.size[1]*scaleFactor)
         .translate([this.props.size[0]*0.5,this.props.size[1]*0.5])
         const pathGenerator = geoPath().projection(projection);
-        const featureSize = extent(this.props.data, d=> d.properties.winnings);
+        const featureSize = extent(this.props.data, d=> d.properties[this.props.x]);
         const stateColor = scaleQuantize().domain(featureSize).range(colorbrewer.PuBu[9]);
         const toolTipStyle = {
           visibility: this.state.hover ? 'visible' : 'hidden',
@@ -49,24 +51,26 @@ export default class USMap extends Component {
             d={pathGenerator(d)}
             onMouseOver={()=> this.mouseIn(d,i)}
             onMouseOut={()=> this.mouseOut()}
-            style={{fill: this.state.hoverID===i ? '#6666FF' : stateColor(d.properties.winnings), 
+            style={{fill: this.state.hoverID===i ? '#6666FF' : stateColor(d.properties[this.props.x]), 
                   stroke: 'black', strokeOpacity: 0.5}}
             className='countries'
         />)
         return <svg width={this.props.size[0]} height={this.props.size[1]}>
         {countries}
-        <ToolTip data={this.state.data} style_={toolTipStyle} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[175, 50]} size={this.props.size}/>
+        <ToolTip data={this.state.data} style_={toolTipStyle} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[175, 50]} size={this.props.size} x={this.props.x}/>
         {console.log(this.props.size[0])}
         {console.log(this.props.size[1])}
         </svg>
     }
 }
              
-function toolTipText({width, height, data}) {
+function toolTipText({width, height, data, x}) {
             return (
                 <g>
                     <text style={{fontSize:height/4}} x={width/15} y={height/2.5}> State: {data.properties.NAME} </text>
-                    <text style={{fontSize:height/4}} x={width/15} y={2*height/2.5}>Average winnings: ${data.properties.winnings} </text>
+                    <text style={{fontSize:height/4}} x={width/15} y={2*height/2.5}>{x==='streak' ? 'Average Streak' : 'Win Rate'}: {
+                x === 'streak' ? (Math.floor(data.properties[x]*100)/100 + ' days') :
+                (data.properties[x]===0 ? "no data available" : Math.floor(data.properties[x]*100) + "%")} </text>
                 </g>
             )
 }
@@ -76,12 +80,19 @@ function toolTipCoords({width, height, data, size}) {
     if (size[0]>size[1]) {
         scaleFactor = 0.003
     }
+    else if (size[0]/size[1] < 0.44) {
+            scaleFactor = 0.0015
+        }
     const projection = geoAlbersUsa()
         .scale(size[0]*size[1]*scaleFactor)
         .translate([size[0]*0.5,size[1]*0.5])
     const center = projection([data.properties.longitude, data.properties.latitude]);
     if (center[0] + width > size[0]) {
         center[0]-=width;
+        if (center[0] < 0) {
+        center[0]+=0.5*width;
     }
+    }
+
     return center
 }

@@ -1,20 +1,18 @@
 #wrapper {
     position:absolute;
-    height:100%;
+    min-height: 100%;
     width:100%;
 }
-#header_wrapper {
-  top:0px;
-  left:0px;
-}
 #App-header {
+  top:0;
+  left:0;
   position: fixed;
   text-align: center;
   width: 100vw;
   height: 100vh;
   background-color: #060CE9;
   /*font-family: 'Gyparody';*/
-  z-index:-99;
+  z-index: -99;
   color: white;
 }
 
@@ -24,22 +22,6 @@
     font-size: 10vmin;
     margin:10vh 10vw;
     padding-bottom: 20vh;
-}
-
-#App-header h2{
-    padding-top: 10vh;
-    position: relative;
-    font-size: 3.5em;
-    margin:10vh 10vw;
-    font-stretch: ultra-expanded;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .title {
@@ -55,18 +37,6 @@
     margin-top: 10vh;
 }
 
-#jeopardy-intro {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-    background-image: url('./jeopardy_intro.gif');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index:-98;
-}
-
 #bodyWrapper {
     background-color: white;
     margin-top: 100vh;
@@ -79,8 +49,8 @@
     font-family: 'PT Sans', serif;
 }
 
-.graphics {
-    
+.graphics h3 {
+    text-align: center;
 }
 
 @font-face {
@@ -107,7 +77,26 @@ div.tooltip {
             pointer-events: none;
         }
 
-@media screen and (max-width: 1020px) {
+.answer { 
+    display: none;
+}
+
+span:hover .answer {
+    display: inline-block;
+}
+
+footer {
+    position: relative;
+    margin-top: -20%;
+    padding-top: 15%;
+    height: 5%;
+    text-align: center;
+    line-height: 50%;
+    clear: both;
+    background: white;
+}
+
+@media screen and (max-width: 800px) {
     
     #bodyWrapper {
         padding-left: 4vw;
@@ -118,5 +107,9 @@ div.tooltip {
     .graphics {
         width: 80%;
         margin: 0 10%;
+    }
+    #map {
+        margin-top: -80%;
+        margin-bottom: -80%;
     }
 }

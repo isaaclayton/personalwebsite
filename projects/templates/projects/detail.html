@@ -1,26 +1,6 @@
-{% extends 'layouts/base.html' %}
-
 {%load template_extras%}
 
-{% block extra_css %} 
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
-{% endblock %}
-
-{% block content %}
-
-<h1 class=post_title>{{ project.title }}</h1>
-
-<!--{% if error_message %}<p><strong> {{ error_message }} </strong></p> {% endif %}
-
-<p> {{ blog.text }} </p>-->
-
-{% with "projectposts/"|addstr:post.title|addstr:".html" as project_html%}
-{%include_fallback project_html "utils/blank.html"%}
-{% endwith %}
-
-{% endblock %}
+{%include 'project_files/jeopardy/index.html'%}
 
 {% block ga %}
 {% if GA_TRACKING_ID %}

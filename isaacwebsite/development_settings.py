@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY_SETTING']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1']
+ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     #3rd party apps
     'grappelli',
     'storages',
+    'webpack_loader',
     #self-made apps
     'blog',
     'utils',
@@ -132,7 +133,15 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "assets"),
 ]
+
+WEBPACK_LOADER = {
+    'JEOPARDY': {
+            'BUNDLE_DIR_NAME': 'jeopardy_bundles/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'assets/jeopardy_bundles/webpack-stats_jep.dev.json'),
+        }
+}
 
 #-----AWS Cloudfront Settings Using Boto and django-storages-----
 

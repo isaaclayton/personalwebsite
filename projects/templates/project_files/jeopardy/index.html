@@ -1,0 +1,31 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="{% static 'layouts/menu.css' %}" />
+    <title>Jeopardy Project</title>
+  </head>
+  <body>
+      <div id = 'wrapper'>
+    <div id="root">
+    </div>
+      {% render_bundle 'main' config='JEOPARDY'%}
+              <footer>
+            <div class='menu'>
+            <nav>
+                <a href="{% url 'home:index' %}">About</a>
+                <a href="{% url 'projects:project_list' %}">Projects</a>
+                <a href="{% url 'blog:post_list' %}">Blog</a>
+                <a href="{% static 'pdf_files/resume.pdf' %}">Resume</a>
+            </nav>
+        </div>
+        <br/>
+      <p>&copy; Isaac Layton 2018.</p>
+      
+    </footer>
+      </div>
+  </body>
+</html>
