@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY_SETTING']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], 'isaaclayton.com', 'www.isaaclayton.com']
+ALLOWED_HOSTS = [os.environ['SERVER_SETTING'], 'isaaclayton.com', 'www.isaaclayton.com', 'http://127.0.0.1']
 
 # Application definition
 
@@ -140,7 +140,7 @@ STATICFILES_DIRS = [
 WEBPACK_LOADER = {
     'JEOPARDY': {
             'BUNDLE_DIR_NAME': 'jeopardy_bundles/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'assets/jeopardy_bundles/webpack-stats.prod.json'),
+            'STATS_FILE': os.path.join(BASE_DIR, 'assets/jeopardy_bundles/webpack-stats-jep.prod.json'),
         }
 }
 

@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
 WEBPACK_LOADER = {
     'JEOPARDY': {
             'BUNDLE_DIR_NAME': 'jeopardy_bundles/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'assets/jeopardy_bundles/webpack-stats_jep.dev.json'),
+            'STATS_FILE': os.path.join(BASE_DIR, 'assets/jeopardy_bundles/webpack-stats-jep.dev.json'),
         }
 }
 
