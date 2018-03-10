@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     #3rd party apps
     'grappelli',
     'storages',
-    'webpack_loader'
+    'webpack_loader',
     #self-made apps
     'blog',
     'utils',
