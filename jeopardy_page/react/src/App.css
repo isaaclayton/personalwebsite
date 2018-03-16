@@ -14,7 +14,6 @@
   min-height: 100%;
   background-color: #060CE9;
   /*font-family: 'Gyparody';*/
-  z-index: -99;
   color: white;
 }
 
@@ -83,8 +82,10 @@
     height:100%;
     min-height:100%;
     width:100%;
-    z-index:1000;
-    overflow: auto;
+    -webkit-transform:translateZ(1px);
+    -moz-transform:translateZ(1px);
+    -o-transform:translateZ(1px);
+    transform:translateZ(1px);
 }
 
 #content {
