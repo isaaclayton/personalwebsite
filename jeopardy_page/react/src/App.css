@@ -160,7 +160,7 @@ footer {
         margin-bottom: -25vh;
     }
     
-    #bodyWrapper {
+    *:not(title_q) {
         -webkit-transform: translate3d(0, 0, 0);
     }
 }
