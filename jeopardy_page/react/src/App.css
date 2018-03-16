@@ -16,6 +16,7 @@
   /*font-family: 'Gyparody';*/
   z-index: -99;
   color: white;
+  overflow: hidden;
 }
 
 #title_q h1{
@@ -84,6 +85,7 @@
     min-height:100%;
     width:100%;
     z-index:1000;
+    overflow: auto;
 }
 
 #content {
