@@ -3,7 +3,31 @@
     min-height: 100%;
     width:100%;
 }
-#App-header {
+
+#title_q {
+  top:0;
+  left:0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background-color: #060CE9;
+  /*font-family: 'Gyparody';*/
+  z-index: -99;
+  color: white;
+}
+
+#title_q h1{
+    top: 20%;
+    position: relative;
+    font-size: 10vmin;
+    margin:10vh 10vw;
+    padding-bottom: 20vh;
+}
+
+/*
+#title_q {
   top:0;
   left:0;
   position: fixed;
@@ -12,18 +36,18 @@
   height: 100vh;
   background-color: #060CE9;
   /*font-family: 'Gyparody';*/
-  z-index: -99;
+  /*z-index: -99;
   color: white;
 }
 
-#App-header h1{
+#title_q h1{
     top: 20vh;
     position: relative;
     font-size: 10vmin;
     margin:10vh 10vw;
     padding-bottom: 20vh;
 }
-
+*/
 .title {
     text-align: center;
 }
@@ -36,7 +60,7 @@
     margin-bottom: 5vh;
     margin-top: 10vh;
 }
-
+/*
 #bodyWrapper {
     background-color: white;
     margin-top: 100vh;
@@ -47,6 +71,27 @@
     line-height: 200%;
     font-size:2.5vh;
     font-family: 'PT Sans', serif;
+}
+*/
+#bodyWrapper {
+    background-color: white;
+    margin-top: 100vh;
+    line-height: 200%;
+    font-size:2.5vh;
+    font-family: 'PT Sans', serif;
+    position:relative;
+    height:100%;
+    min-height:100%;
+    width:100%;
+    z-index:1000;
+}
+
+#content {
+    margin-left: 15%;
+    padding-top: 10vh;
+    margin-bottom: 10vh;
+    width: 60%;
+    height: 80%
 }
 
 .graphics h3 {
@@ -98,18 +143,18 @@ footer {
 
 @media screen and (max-width: 800px) {
     
-    #bodyWrapper {
-        padding-left: 4vw;
-        padding-right: 4vw;
-        margin-left: 0px;
-        margin-right: 0px;
+
+    #content {
+        width: 92%;
+        margin-left: 4%;
     }
     .graphics {
         width: 80%;
         margin: 0 10%;
     }
     #map {
-        margin-top: -80%;
-        margin-bottom: -80%;
+        padding-left: 5%;
+        margin-top: -25vh;
+        margin-bottom: -25vh;
     }
 }

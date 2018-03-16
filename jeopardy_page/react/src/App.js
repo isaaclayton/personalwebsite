@@ -104,10 +104,11 @@ class App extends Component {
         return (
             <div>
                 <link href = "https://fonts.googleapis.com/css?family=PT+Sans" rel = "stylesheet" />
-                <header id = "App-header">
+                <header id = "title_q">
                 <h1> THIS 34 YEAR OLD TELEVISION SERIES IS KNOWN AS "AMERICA'S FAVORITE QUIZ SHOW" </h1>
                 </header> 
                 <div id ='bodyWrapper'>
+                    <div id='content'>
                     <p> &emsp; If you guessed "Are You Smarter Than a Fifth Grader", hosted by Jeff Foxworthy, <a href='http://www.jefffoxworthy.com/jokes'>you might be a redneck</a>, but you also might want to reconsider your answer. The correct answer is... </p>
                     <div className='title'>
                     <div className='jeopardy-word'> Jeopardy!</div>
@@ -136,14 +137,14 @@ class App extends Component {
                         <div className='graphics'>
                             <h3>Map of State Winning Rates</h3>
                             <div id = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/2,this.state.screenHeight/1.5]} x={'rate'} text={'Map of State Winning Rates'}/>
+                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.5,this.state.screenHeight/1.25]} x={'rate'} text={'Map of State Winning Rates'}/>
                             </div>
                         </div>
                         <p> &emsp; The average streak was a little more straightforward. The only tweaking that needed to be done was that I had to remove special games, such as Kid's Week and Tournament of Champions, to ensure the correct streaks were recorded. It comes as no surprise to see that Utah is the highest. The average streak for them was 11.27 days. The next best were Missouri with an average streak of 2.27 days, and West Virginia with an average streak of 2.22 days. </p>
                         <div className='graphics'>
                             <h3>Map of State Average Winning Streak</h3>
                             <div id = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/2,this.state.screenHeight/1.5]} x={'streak'} text={'Map of State Average Winning Streak'}/>
+                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.5,this.state.screenHeight/1.25]} x={'streak'} text={'Map of State Average Winning Streak'}/>
                             </div>
                         </div>
                         <p>The state that performed highest in both measures combined was West Virginia. They've had several contestants win 4-5 games in a row. The state that appeared to do the worst was South Dakota, with the 20% of contestants who win at least one game only winning that one game. If I decided to include special games though, South Dakota would have included <a href="http://www.j-archive.com/showplayer.php?player_id=1138">Eric Newhouse</a>, who started by winning the 1989 Teen Tournament and ended up being in 5 other Jeopardy tournaments. Good job Eric.</p>
@@ -218,6 +219,7 @@ class App extends Component {
                     
                     <p> This can be found on my GitHub <a href='https://github.com/isaaclayton/jeopardy_project'>here</a>.</p>
                 </div> 
+                </div>
             </div>
     );
 }

@@ -11,11 +11,11 @@ export default class USMap extends Component {
     constructor(props) {
         super(props);
         const x = this.props.x;
-        this.state =  {hover: false, 
+        this.state =  {hover: false,
                        hoverID: -1,
-                       data: {properties : {latitude: 40.1135, longitude: -111.8535}, size: this.props.size}
+                       data: {latitude: 40.1135, longitude: -111.8535, size: this.props.size}
                       }
-        this.state.data.properties[x] = 0;
+        this.state.data[x] = 0;
     }
     
     
@@ -28,12 +28,12 @@ export default class USMap extends Component {
     }
     
     render() {
-        let scaleFactor = 0.0021;
+        let scaleFactor = 0.0028;
         if (this.props.size[0]>this.props.size[1]) {
-            scaleFactor = 0.003;
+            scaleFactor = 0.002;
         }
         else if (this.props.size[0]/this.props.size[1] < 0.44) {
-            scaleFactor = 0.0015
+            scaleFactor = 0.0023;
         }
         const projection = geoAlbersUsa()
         .scale(this.props.size[0]*this.props.size[1]*scaleFactor)
@@ -49,7 +49,7 @@ export default class USMap extends Component {
         .map((d,i) => <path
             key={'path' + i}
             d={pathGenerator(d)}
-            onMouseOver={()=> this.mouseIn(d,i)}
+            onMouseOver={()=> this.mouseIn(d.properties,i)}
             onMouseOut={()=> this.mouseOut()}
             style={{fill: this.state.hoverID===i ? '#6666FF' : stateColor(d.properties[this.props.x]), 
                   stroke: 'black', strokeOpacity: 0.5}}
@@ -58,8 +58,6 @@ export default class USMap extends Component {
         return <svg width={this.props.size[0]} height={this.props.size[1]}>
         {countries}
         <ToolTip data={this.state.data} style_={toolTipStyle} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[175, 50]} size={this.props.size} x={this.props.x}/>
-        {console.log(this.props.size[0])}
-        {console.log(this.props.size[1])}
         </svg>
     }
 }
@@ -67,10 +65,10 @@ export default class USMap extends Component {
 function toolTipText({width, height, data, x}) {
             return (
                 <g>
-                    <text style={{fontSize:height/4}} x={width/15} y={height/2.5}> State: {data.properties.NAME} </text>
+                    <text style={{fontSize:height/4}} x={width/15} y={height/2.5}> State: {data.NAME} </text>
                     <text style={{fontSize:height/4}} x={width/15} y={2*height/2.5}>{x==='streak' ? 'Average Streak' : 'Win Rate'}: {
-                x === 'streak' ? (Math.floor(data.properties[x]*100)/100 + ' days') :
-                (data.properties[x]===0 ? "no data available" : Math.floor(data.properties[x]*100) + "%")} </text>
+                x === 'streak' ? (Math.floor(data[x]*100)/100 + ' days') :
+                (data[x]===0 ? "no data available" : Math.floor(data[x]*100) + "%")} </text>
                 </g>
             )
 }
@@ -78,15 +76,15 @@ function toolTipText({width, height, data, x}) {
 function toolTipCoords({width, height, data, size}) {
     let scaleFactor = 0.0021;
     if (size[0]>size[1]) {
-        scaleFactor = 0.003
+        scaleFactor = 0.002;
     }
     else if (size[0]/size[1] < 0.44) {
-            scaleFactor = 0.0015
+            scaleFactor = 0.0023;
         }
     const projection = geoAlbersUsa()
         .scale(size[0]*size[1]*scaleFactor)
         .translate([size[0]*0.5,size[1]*0.5])
-    const center = projection([data.properties.longitude, data.properties.latitude]);
+    const center = projection([data.longitude, data.latitude]);
     if (center[0] + width > size[0]) {
         center[0]-=width;
         if (center[0] < 0) {
