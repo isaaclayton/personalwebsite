@@ -160,7 +160,7 @@ footer {
         margin-bottom: -25vh;
     }
     
-    *:not(html) {
+    #bodyWrapper {
         -webkit-transform: translate3d(0, 0, 0);
     }
 }
