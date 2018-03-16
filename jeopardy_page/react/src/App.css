@@ -82,10 +82,10 @@
     height:100%;
     min-height:100%;
     width:100%;
-    -webkit-transform:translateZ(1px);
-    -moz-transform:translateZ(1px);
-    -o-transform:translateZ(1px);
-    transform:translateZ(1px);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    perspective: 1000;
+    -webkit-perspective: 1000;
 }
 
 #content {
@@ -158,9 +158,5 @@ footer {
         padding-left: 5%;
         margin-top: -25vh;
         margin-bottom: -25vh;
-    }
-    
-    title_q {
-        -webkit-transform: translate3d(0, 0, 0);
     }
 }
