@@ -136,15 +136,15 @@ class App extends Component {
                         <p> &emsp; To answer this question, there were two facets I decided to inspect: the state's "rate" of winning and the average winning streak. For the rate of winning, I made the choice to look at the rate in which a state's contestant won at least one game. Since I also looked at average streak, this seemed like a good way to make sure that one contestant from a state didn't inaccurately drive up the winning rate. Before doing this, Utah blew every state out of the water. This was due to Ken Jennings, the Jeopardy contestant with the highest winning streak of 74 games, being from Salt Lake City. After adjusting for this, I also weighted the rates based on games with a state being represented by more than one contestant. As you can see below, it appears that Iowa, Arkansas, and West Virginia have the highest percentage of contestants winning at least one game. </p>
                         <div className='graphics'>
                             <h3>Map of State Winning Rates</h3>
-                            <div id = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.5,this.state.screenHeight/1.25]} x={'rate'} text={'Map of State Winning Rates'}/>
+                            <div className = 'map'>
+                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.25,this.state.screenHeight/1.2]} x={'rate'} text={'Map of State Winning Rates'}/>
                             </div>
                         </div>
                         <p> &emsp; The average streak was a little more straightforward. The only tweaking that needed to be done was that I had to remove special games, such as Kid's Week and Tournament of Champions, to ensure the correct streaks were recorded. It comes as no surprise to see that Utah is the highest. The average streak for them was 11.27 days. The next best were Missouri with an average streak of 2.27 days, and West Virginia with an average streak of 2.22 days. </p>
                         <div className='graphics'>
                             <h3>Map of State Average Winning Streak</h3>
-                            <div id = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.5,this.state.screenHeight/1.25]} x={'streak'} text={'Map of State Average Winning Streak'}/>
+                            <div className = 'map'>
+                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.25,this.state.screenHeight/1.2]} x={'streak'} text={'Map of State Average Winning Streak'}/>
                             </div>
                         </div>
                         <p>The state that performed highest in both measures combined was West Virginia. They've had several contestants win 4-5 games in a row. The state that appeared to do the worst was South Dakota, with the 20% of contestants who win at least one game only winning that one game. If I decided to include special games though, South Dakota would have included <a href="http://www.j-archive.com/showplayer.php?player_id=1138">Eric Newhouse</a>, who started by winning the 1989 Teen Tournament and ended up being in 5 other Jeopardy tournaments. Good job Eric.</p>
@@ -153,7 +153,9 @@ class App extends Component {
                         <h3><i>Have certain words become more popular in questions?</i></h3>
                         <p> &emsp; To see if certain words have gotten more or less popular, I gathered all of the questions' text using the Python library <a href="https://www.nltk.org">NLTK (Natural Language ToolKit)</a>. I partitioned the questions into seasons, and looked at the percent of questions in the season the word appeared in. Here are six that I decided to focus on.</p>
                         <div className='graphics'>
-                            {clue_words}
+                            <div className='plot'>
+                                {clue_words}
+                            </div>
                         </div>
                         <p> &emsp; While President Obama got mentioned more when he entered the presidency, President Trump has been popular as a celebrity for quite some time. His name (and uses of the verb trump) was mentioned the most in Season 21, the season directly after the premiere of Trump's popular show <i><a href='https://en.wikipedia.org/wiki/The_Apprentice_(U.S._TV_series)'>The Apprentice</a></i>. His name appeared in 9 questions that season. The word "crew" spiked significantly in 2001, which is when the <a href='https://www.jeopardy.com/about/clue-crew/'>Clue Crew</a> started. Interestingly, the word "one" has more than doubled in frequency since Jeopardy began, usually at the beginning of a question. With "texting" and "internet", their emergence in everyday vocabulary has translated into them being asked about on Jeopardy. </p>
                     </div>

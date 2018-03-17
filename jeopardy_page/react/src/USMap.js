@@ -6,6 +6,7 @@ import {scaleQuantize} from 'd3-scale';
 import colorbrewer from 'colorbrewer';
 import {select} from 'd3-selection';
 import {rgb} from 'd3-color';
+import {transition} from 'd3-transition';
 import ToolTip from './ToolTip';
 
 export default class USMap extends Component {
@@ -27,9 +28,9 @@ export default class USMap extends Component {
         const node = this.node;
         let scaleFactor = 0.0028;
         if (this.props.size[0]>this.props.size[1]) {
-            scaleFactor = 0.002;
+            scaleFactor = 0.0015;
         }
-        else if (this.props.size[0]/this.props.size[1] < 0.44) {
+        else if (this.props.size[0]/this.props.size[1] < 0.553) {
             scaleFactor = 0.0023;
         }
         const projection = geoAlbersUsa()
@@ -105,9 +106,9 @@ function toolTipText({width=0, height=0, data, x}) {
 function toolTipCoords({width=0, height=0, data, size}) {
     let scaleFactor = 0.0028;
     if (size[0]>size[1]) {
-        scaleFactor = 0.002;
+        scaleFactor = 0.0015;
     }
-    else if (size[0]/size[1] < 0.44) {
+    else if (size[0]/size[1] < 0.553) {
             scaleFactor = 0.0023;
         }
     const projection = geoAlbersUsa()
