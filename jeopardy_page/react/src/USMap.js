@@ -113,8 +113,14 @@ function toolTipCoords({width=0, height=0, data, size}) {
     if (center[0] + width > size[0]) {
         center[0]-=width;
         if (center[0] < 0) {
-        center[0]+=0.5*width;
+            center[0]+=0.5*width;
     }
+    }
+    if (center[1] + height > size[1]) {
+        center[1]-=height;
+        if (center[1] < 0) {
+            center[1]+=0.5*height;
+        }
     }
 
     return center
