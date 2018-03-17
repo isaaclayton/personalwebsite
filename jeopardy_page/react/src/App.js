@@ -12,7 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.onResize = this.onResize.bind(this);
-        this.state = {clue_words: [], state_winnings:[], screenWidth: 1000, screenHeight: 500}
+        this.state = {clue_words: [], state_winnings:[], screenWidth: 0, screenHeight: 0}
     }
     componentWillMount() {
         

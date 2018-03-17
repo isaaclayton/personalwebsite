@@ -5,6 +5,7 @@ import {extent} from 'd3-array';
 import {scaleQuantize} from 'd3-scale';
 import colorbrewer from 'colorbrewer';
 import ToolTip from './ToolTip'
+//import ReactTooltip from 'react-tooltip'
 
 export default class USMap extends Component {
     
