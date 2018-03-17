@@ -128,9 +128,6 @@ span:hover .answer {
     display: inline-block;
 }*/
 
-.map {
-    margin-left: -15%;
-}
 
 footer {
     position: relative;
@@ -150,16 +147,12 @@ footer {
         width: 92%;
         margin-left: 4%;
     }
+    #title_q h1 {
+        top: 10vh;
+    }
     .graphics {
         width: 92%;
         margin: 0 4%;
-    }
-    .map {
-        padding-left: 5%;
-        /*margin-left: 0;
-        margin-top: -15vh;
-        margin-bottom: -15vh;*/
-        margin: -15vh auto;
     }
     .plot {
         margin: auto;

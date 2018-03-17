@@ -26,15 +26,16 @@ export default class USMap extends Component {
     
     createMap() {
         const node = this.node;
-        let scaleFactor = 0.0028;
+        /*let scaleFactor = 0.0028;
         if (this.props.size[0]>this.props.size[1]) {
-            scaleFactor = 0.0015;
+            scaleFactor = 1.375*this.props.size[0];
         }
         else if (this.props.size[0]/this.props.size[1] < 0.553) {
             scaleFactor = 0.0023;
-        }
+        }*/
+        let scaleFactor = 1.375*this.props.size[0];
         const projection = geoAlbersUsa()
-        .scale(this.props.size[0]*this.props.size[1]*scaleFactor)
+        .scale(scaleFactor)
         .translate([this.props.size[0]*0.5,this.props.size[1]*0.5])
         const pathGenerator = geoPath().projection(projection);
         const featureSize = extent(this.props.data, d=> d.properties[this.props.x]);
@@ -104,15 +105,9 @@ function toolTipText({width=0, height=0, data, x}) {
 }
         
 function toolTipCoords({width=0, height=0, data, size}) {
-    let scaleFactor = 0.0028;
-    if (size[0]>size[1]) {
-        scaleFactor = 0.0015;
-    }
-    else if (size[0]/size[1] < 0.553) {
-            scaleFactor = 0.0023;
-        }
+    let scaleFactor = 1.375*size[0];
     const projection = geoAlbersUsa()
-        .scale(size[0]*size[1]*scaleFactor)
+        .scale(scaleFactor)
         .translate([size[0]*0.5,size[1]*0.5])
     const center = projection([data.longitude, data.latitude]);
     if (center[0] + width > size[0]) {

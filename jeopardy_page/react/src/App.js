@@ -89,6 +89,11 @@ class App extends Component {
     if (!this.state.clue_words) {
       <div/>
     }*/
+    let mapWidth = this.state.screenWidth*.9;
+    if(this.state.screenWidth>this.state.screenHeight) {
+        mapWidth = mapWidth*.75;
+    }
+    let mapHeight = mapWidth*.625;
     let clue_words = [];
     const numWords = 6
     if (this.state.clue_words.length >0) {
@@ -137,14 +142,14 @@ class App extends Component {
                         <div className='graphics'>
                             <h3>Map of State Winning Rates</h3>
                             <div className = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.25,this.state.screenHeight/1.2]} x={'rate'} text={'Map of State Winning Rates'}/>
+                            <USMap data={this.state.state_winnings} size={[mapWidth,mapHeight]} x={'rate'} text={'Map of State Winning Rates'}/>
                             </div>
                         </div>
                         <p> &emsp; The average streak was a little more straightforward. The only tweaking that needed to be done was that I had to remove special games, such as Kid's Week and Tournament of Champions, to ensure the correct streaks were recorded. It comes as no surprise to see that Utah is the highest. The average streak for them was 11.27 days. The next best were Missouri with an average streak of 2.27 days, and West Virginia with an average streak of 2.22 days. </p>
                         <div className='graphics'>
                             <h3>Map of State Average Winning Streak</h3>
                             <div className = 'map'>
-                            <USMap data={this.state.state_winnings} size={[this.state.screenWidth/1.25,this.state.screenHeight/1.2]} x={'streak'} text={'Map of State Average Winning Streak'}/>
+                            <USMap data={this.state.state_winnings} size={[mapWidth,mapHeight]} x={'streak'} text={'Map of State Average Winning Streak'}/>
                             </div>
                         </div>
                         <p>The state that performed highest in both measures combined was West Virginia. They've had several contestants win 4-5 games in a row. The state that appeared to do the worst was South Dakota, with the 20% of contestants who win at least one game only winning that one game. If I decided to include special games though, South Dakota would have included <a href="http://www.j-archive.com/showplayer.php?player_id=1138">Eric Newhouse</a>, who started by winning the 1989 Teen Tournament and ended up being in 5 other Jeopardy tournaments. Good job Eric.</p>
