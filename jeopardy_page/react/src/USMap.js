@@ -4,31 +4,27 @@ import {geoAlbersUsa, geoPath} from 'd3-geo';
 import {extent} from 'd3-array';
 import {scaleQuantize} from 'd3-scale';
 import colorbrewer from 'colorbrewer';
-import ToolTip from './ToolTip'
-//import ReactTooltip from 'react-tooltip'
+import {select} from 'd3-selection';
+import {rgb} from 'd3-color';
+import ToolTip from './ToolTip';
 
 export default class USMap extends Component {
     
     constructor(props) {
         super(props);
-        const x = this.props.x;
-        this.state =  {hover: false,
-                       hoverID: -1,
-                       data: {latitude: 40.1135, longitude: -111.8535, size: this.props.size}
-                      }
-        this.state.data[x] = 0;
+        this.createMap = this.createMap.bind(this);
+        this.state = {data: {NAME:'', longitude:-111.8535, latitude:40.1135}}
     }
     
-    
-    mouseIn(d,i) {
-        this.setState({hover: true, data: d, hoverID: i});
+    componentDidMount() {
+        this.createMap();
+    }
+    componentDidUpdate() {
+        this.createMap();
     }
     
-    mouseOut() {
-        this.setState({hover: false, hoverID: -1});
-    }
-    
-    render() {
+    createMap() {
+        const node = this.node;
         let scaleFactor = 0.0028;
         if (this.props.size[0]>this.props.size[1]) {
             scaleFactor = 0.002;
@@ -42,28 +38,60 @@ export default class USMap extends Component {
         const pathGenerator = geoPath().projection(projection);
         const featureSize = extent(this.props.data, d=> d.properties[this.props.x]);
         const stateColor = scaleQuantize().domain(featureSize).range(colorbrewer.PuBu[9]);
-        const toolTipStyle = {
-          visibility: this.state.hover ? 'visible' : 'hidden',
-          opacity: 0.9
+        select(node)
+        .selectAll('g')
+        .data(this.props.data)
+        .enter()
+        .append('g')
+        .attr("class", "states")
+        .append('path')
+        .attr("d", pathGenerator)
+        .attr("i", (d,i)=>i)
+        .style("fill", d => stateColor(d.properties[this.props.x]))
+        .style("stroke", d => rgb(stateColor(d.properties[this.props.x])).darker())
+        .on('mouseover', mouseover.bind(this))
+        .on('mouseout', mouseout.bind(this));
+        
+        select('g.'+this.props.x)
+            .attr('class', this.props.x)
+            .style('opacity', 0)
+            .style('position', 'absolute')
+            .style('text-align', 'center')
+            .style('width', '150px')
+            .style('height', '40px')
+            .style('padding', '2px')
+            .style('font', '12px')
+            .style('background', 'lightsteelblue')
+            .style('border', '0px')
+            .style('pointer-events', 'none')
+        
+        function mouseover(d) {
+            this.setState({data:d.properties})
+            select('g.'+this.props.x)
+                    .style('opacity', .9)
+                    .transition().duration(200);
+            
         }
-        const countries = this.props.data
-        .map((d,i) => <path
-            key={'path' + i}
-            d={pathGenerator(d)}
-            onMouseOver={()=> this.mouseIn(d.properties,i)}
-            onMouseOut={()=> this.mouseOut()}
-            style={{fill: this.state.hoverID===i ? '#6666FF' : stateColor(d.properties[this.props.x]), 
-                  stroke: 'black', strokeOpacity: 0.5}}
-            className='countries'
-        />)
+        function mouseout() {
+            select('g.'+this.props.x)
+                .transition()
+                .duration(500)
+                .style('opacity',0)
+        }
+    }
+    
+    render() {
         return <svg width={this.props.size[0]} height={this.props.size[1]}>
-        {countries}
-        <ToolTip data={this.state.data} style_={toolTipStyle} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[175, 50]} size={this.props.size} x={this.props.x}/>
+            <g ref={node => this.node = node}></g>
+            <g className={this.props.x}>
+            <ToolTip data={this.state.data} textFunc={toolTipText} xyCoords={toolTipCoords} boxSize={[175, 50]} size={this.props.size} x={this.props.x}/>
+            </g>
         </svg>
     }
 }
+
              
-function toolTipText({width, height, data, x}) {
+function toolTipText({width=0, height=0, data, x}) {
             return (
                 <g>
                     <text style={{fontSize:height/4}} x={width/15} y={height/2.5}> State: {data.NAME} </text>
@@ -74,8 +102,8 @@ function toolTipText({width, height, data, x}) {
             )
 }
         
-function toolTipCoords({width, height, data, size}) {
-    let scaleFactor = 0.0021;
+function toolTipCoords({width=0, height=0, data, size}) {
+    let scaleFactor = 0.0028;
     if (size[0]>size[1]) {
         scaleFactor = 0.002;
     }

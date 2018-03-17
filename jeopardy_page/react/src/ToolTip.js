@@ -1,5 +1,5 @@
 import React from 'react';
-export default function ToolTip({data, style_, textFunc, xyCoords, size, boxSize, x, className='tooltip'}) {
+export default function ToolTip({data, style_={}, textFunc, xyCoords, size, boxSize, x, className='tooltip'}) {
     const width=boxSize[0];
     const height=boxSize[1];
     const coords = xyCoords({width: width, height: height, data: data, size: size});
