@@ -8,6 +8,7 @@ export default ({size, scales, margins}) => {
     scale: scales.xScale,
     translate: `translate(0, ${size[1] - margins[1]})`,
     tickSize: size[1] - 2*margins[1],
+    numTicks: 8,
   }
 
   const yProps = {
@@ -15,6 +16,7 @@ export default ({size, scales, margins}) => {
     scale: scales.yScale,
     translate: `translate(${margins[0]}, 0)`,
     tickSize: size[0] - 2*margins[0],
+    numTicks: 8,
   }
 
   return (

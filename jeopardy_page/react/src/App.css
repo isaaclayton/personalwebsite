@@ -13,7 +13,6 @@
   height: 100%;
   min-height: 100%;
   background-color: #060CE9;
-  /*font-family: 'Gyparody';*/
   color: white;
 }
 
@@ -25,28 +24,6 @@
     padding-bottom: 20vh;
 }
 
-/*
-#title_q {
-  top:0;
-  left:0;
-  position: fixed;
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: #060CE9;
-  /*font-family: 'Gyparody';*/
-  /*z-index: -99;
-  color: white;
-}
-
-#title_q h1{
-    top: 20vh;
-    position: relative;
-    font-size: 10vmin;
-    margin:10vh 10vw;
-    padding-bottom: 20vh;
-}
-*/
 .title {
     text-align: center;
 }
@@ -59,19 +36,7 @@
     margin-bottom: 5vh;
     margin-top: 10vh;
 }
-/*
-#bodyWrapper {
-    background-color: white;
-    margin-top: 100vh;
-    padding-top: 10vh;
-    padding-left: 20vw;
-    padding-right: 20vw;
-    padding-bottom: 25vh;
-    line-height: 200%;
-    font-size:2.5vh;
-    font-family: 'PT Sans', serif;
-}
-*/
+
 #bodyWrapper {
     background-color: white;
     margin-top: 100vh;
@@ -85,7 +50,7 @@
 }
 
 #content {
-    margin-left: 15%;
+    margin-left: 20%;
     padding-top: 10vh;
     margin-bottom: 10vh;
     width: 60%;
@@ -102,33 +67,6 @@
    url('./font_files/gyparody-webfont.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }  
 
-@font-face {
-    font-family: 'Mavericks';
-    src: url('./font_files/NBAMAVER.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-    url('./font_files/NBAMAVER.TTF') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
-
-/*g.rate {
-            position: absolute;
-            text-align: center;
-            width: 150px;
-            height: 40px;
-            padding: 2px;
-            font: 12px;
-            background: lightsteelblue;
-            border: 0px;
-            pointer-events: none;
-        }
-
-.answer { 
-    display: none;
-}
-
-span:hover .answer {
-    display: inline-block;
-}*/
-
-
 footer {
     position: relative;
     margin-top: -20%;
@@ -138,6 +76,19 @@ footer {
     line-height: 50%;
     clear: both;
     background: white;
+}
+
+#legend {
+    padding: 1.5em 0 0 1.5em;
+}
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 @media screen and (max-width: 800px) {

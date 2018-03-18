@@ -91,9 +91,9 @@ class App extends Component {
     }*/
     let mapWidth = this.state.screenWidth*.9;
     if(this.state.screenWidth>this.state.screenHeight) {
-        mapWidth = mapWidth*.75;
+        mapWidth = mapWidth*.65;
     }
-    let mapHeight = mapWidth*.625;
+    let mapHeight = mapWidth*.8;
     let clue_words = [];
     const numWords = 6
     if (this.state.clue_words.length >0) {
