@@ -7,6 +7,7 @@ import {
 } from 'd3-request';
 import WordFreq from './WordFreq';
 import USMap from './USMap';
+import Answer from './Answer'
 
 class App extends Component {
     constructor(props) {
@@ -172,27 +173,32 @@ class App extends Component {
                         <ol>
                             <li><b><u>C.I.A. DIRECTORS</u></b>: <br/>0/5 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"An Air Force base on California's Central Coast is named for this general & 1940s C.I.A. director" <br/><span>Answer: <span className='answer'>Hoyt Vandenberg</span></span></li>
+                                    <li>"An Air Force base on California's Central Coast is named for this general & 1940s C.I.A. director" 
+                                        <Answer answer={'Hoyt Vandenberg'}/></li>
                                 </ul>
                             </li>
                             <li><b><u>CENTRAL AMERICAN CAPITALS</u></b>: <br/>0/5 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"Ruins from the Mayan city Kaminaljuyu can be found in this capital but much has been covered by urban expansion" <br/><span>Answer: <span className='answer'>Guatemala City</span></span></li>
+                                    <li>"Ruins from the Mayan city Kaminaljuyu can be found in this capital but much has been covered by urban expansion" 
+                                        <Answer answer={'Guatemala City'}/></li>
                                 </ul>
                             </li>
                             <li><b><u>GIVE THE ORDER (given an animal, give the biological order)</u></b>: <br/>0/5 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"The gorilla" <br/><span>Answer: <span className='answer'>primate</span></span></li>
+                                    <li>"The gorilla" 
+                                        <Answer answer={'primate'}/></li>
                                 </ul>
                             </li>
                             <li><b><u>QUOTABLE OSCAR HOSTS</u></b>: <br/>0/5 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"1974: 'Just think, the only laugh that man will probably ever get is for stripping and showing off his shortcomings'"<br/><span>Answer: <span className='answer'>David Niven</span></span></li>
+                                    <li>"1974: 'Just think, the only laugh that man will probably ever get is for stripping and showing off his shortcomings'" 
+                                        <Answer answer={'David Niven'}/></li>
                                 </ul>
                             </li>
                             <li><b><u>STAR TREK: VOYAGER</u></b>: <br/>0/5 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"Voyager in the Delta Quadrant is trying to get back to this quadrant, its home"<br/><span>Answer: <span className='answer'>the Alpha Quadrant</span></span></li>
+                                    <li>"Voyager in the Delta Quadrant is trying to get back to this quadrant, its home"
+                                        <Answer answer={'the Alpha Quadrant'}/></li>
                                 </ul>
                             </li>
                         </ol>
@@ -201,22 +207,26 @@ class App extends Component {
                         <ol>
                             <li><b><u>TV SPIN-OFFS</u></b>: <br/>40/40 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"'Croc Files', from this nature show" <br/><span>Answer: <span className='answer'>The Crocodile Hunter</span></span></li>
+                                    <li>"'Croc Files', from this nature show" 
+                                        <Answer answer={'The Crocodile Hunter'}/></li>
                                 </ul>
                             </li>
                             <li><b><u>LIBROS EN ESPAÑOL</u></b>: <br/>35/35 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"Rowling:'Harry Potter y la Piedra Filosofal'" <br/><span>Answer: <span className='answer'>Harry Potter and the Sorcerer's Stone</span></span></li>
+                                    <li>"Rowling:'Harry Potter y la Piedra Filosofal'" 
+                                        <Answer answer={"Harry Potter and the Sorcerer's Stone"}/></li>
                                 </ul>
                             </li>
                             <li><b><u>NETWORKING (given the show, give the TV network)</u></b>: <br/>35/35 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"Dinner: Impossible" <br/><span>Answer: <span className='answer'>The Food Network</span></span></li>
+                                    <li>"Dinner: Impossible"
+                                        <Answer answer={"The Food Network"}/></li>
                                 </ul>
                             </li>
                             <li><b><u>CHINESE HISTORY</u></b>: <br/>32/32 questions answered correctly. One of the questions was:
                                 <ul>
-                                    <li>"China's Shang Dynasty capital, Anyang, was in the lower valley of this 'colorful' river" <br/><span>Answer: <span className='answer'>yellow</span></span></li>
+                                    <li>"China's Shang Dynasty capital, Anyang, was in the lower valley of this 'colorful' river" 
+                                        <Answer answer={"yellow"}/></li>
                                 </ul>
                             </li>
                         </ol>

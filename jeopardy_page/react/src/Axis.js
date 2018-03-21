@@ -20,7 +20,13 @@ export default class Axis extends Component {
       .tickSize(-this.props.tickSize)
       .ticks([this.props.numTicks])
     if ('tickValues' in this.props) {
-        axis = axis.tickValues(this.props.tickValues)
+        let ticks = this.props.tickValues;
+        if (this.props.percent) {
+            for (let i=0; i<ticks.length; i++) {
+                ticks[i] = ticks[i]*100 + '%';
+            }
+        }
+        axis = axis.tickValues(ticks)
     }
     if ('tickPadding' in this.props) {
         axis = axis.tickPadding(this.props.tickPadding)

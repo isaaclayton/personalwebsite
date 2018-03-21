@@ -20,7 +20,7 @@ export default class USMap extends Component {
                      extent: [0,100],
                      quantizeScale: scaleQuantize().domain([0,0]).range(colorbrewer.PuBu[9]),
                      linearScale: scaleLinear().domain([0,0]).range([0,500*.75]),
-                     count:0,
+                     finished:false,
                      }
     }
     
@@ -42,7 +42,7 @@ export default class USMap extends Component {
             if(nextProps.size[0] < 500) {
                 this.setState({tooltipSize: [150, 50]});
             }
-            this.setState({count: 1});
+            this.setState({finished: true});
         }
     }
     
@@ -53,7 +53,7 @@ export default class USMap extends Component {
         .scale(scaleFactor)
         .translate([this.props.size[0]*0.5,this.props.size[1]*0.5])
         const pathGenerator = geoPath().projection(projection);
-        if(this.state.count === 1) {
+        if(this.state.finished) {
             let stateColor = this.state.quantizeScale;
             let linear = this.state.linearScale;
             select(`g.${this.props.x}-Axis`).selectAll('rect')
