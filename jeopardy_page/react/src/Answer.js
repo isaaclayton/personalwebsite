@@ -14,10 +14,10 @@ export default class Answer extends Component {
 
   render() {
       return (
-          <div>
-          <span onClick={this.switcheroo}>
-              Answer: </span>
-          <span style={{'visibility': this.state.hidden ? 'hidden' : 'visible'}}>{this.props.answer}</span>
+          <div style={{'paddingBottom': '3vh'}}>
+          <button style={{'fontSize': '2vh'}} onClick={this.switcheroo}>
+            {this.state.hidden ? 'Show' : 'Hide'} Answer </button>
+          <div style={{'visibility': this.state.hidden ? 'hidden' : 'visible'}}>{this.props.answer}</div>
             </div>
           )
   }
