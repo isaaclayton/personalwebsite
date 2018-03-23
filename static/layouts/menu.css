@@ -1,9 +1,0 @@
-.menu nav {
-    text-align: center;
-    font-family: 'PT Sans', serif;
-    font-size: 1.2em;
-}
-
-.menu a + a {
-    margin-left: 1.1em;
-}

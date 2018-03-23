@@ -13,17 +13,25 @@ h3 {
     letter-spacing: 2px;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
 body {
-    margin: 8% 25% 3% 25%;
+    margin:15vh 0 8vh 0;
+    padding: 0 25% 0 25%;
     text-align: left;
     vertical-align: middle;
     font-family: 'PT Sans', serif;
     line-height: 200%;
     width: 50%;
+    height: 100%;
+    min-height: 100%;
 }
 
 .menu {
-    margin-top: 2em;
+    margin-top: 2vh;
+    margin-bottom: -3vh;
 }
 
 .menu nav {
@@ -66,28 +74,50 @@ img {
     width: 100%;
 }
 
-#body_wrapper {
-    min-height: 100%;
-    padding-bottom: 5%
-}
-
 footer {
-    position: relative;
-    margin-top: -20%;
-    padding-top: 10%;
-    height: 5%;
+    position: absolute;
+    height: 9vh;
     text-align: center;
     line-height: 50%;
     clear: both;
+    bottom: 0;
+    width: 50%;
+    margin: auto;
+}
+
+.social {
+    padding-top: 4vh;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.social span {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.logo {
+    width: 4%;
+    height: 4%;
 }
 
 @media screen and (max-width: 1020px) {
     
+    .logo {
+        width: 10%;
+        height: 10%;
+    }
+    
     body {
-        margin: 15% 5% 3% 5%;
+        padding: 0% 5% 0% 5%;
+        margin-top: 10vh;
+        margin-bottom: 5vh;
         width: 90%;     
     }
-    #body_wrapper {
-        min-height: 95%;
+    footer {
+        width: 90%;
+        height: 6vh;
     }
 }

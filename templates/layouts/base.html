@@ -1,17 +1,33 @@
 {% load static %}
-
+<!DOCTYPE html>
+<html>
 <head>
-    <title> Isaac Layton </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static 'layouts/base.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    {% block extra_css %}{% endblock %}
+    {% block extra_head %}{% endblock %}
 </head>
 
 <body>
     <div id='body_wrapper'>
         <div id='big_name'> Isaac Layton </div>
-    
+        <div class='social'>
+            <span>
+            <a href="https://github.com/isaaclayton">
+              <img src="{% static 'images/GitHub-Mark-64px.png'%}" alt="Check out my GitHub!" class='logo'>
+            </a>
+            </span>
+            <span>
+            <a href="https://twitter.com/statchance">
+              <img src="{% static 'images/Twitter_Logo_Blue.png'%}" alt="Check out my Twitter!" class='logo'>
+            </a>
+            </span>
+            <span>
+            <a href="https://www.linkedin.com/in/isaaclayton/">
+              <img src="{% static 'images/In-2C-41px-R.png'%}" alt="Check out my Twitter!" class='logo'>
+            </a>
+            </span>
+        </div>
         <div class='menu'>
             <nav>
                 <a href="{% url 'home:index' %}">About</a>
@@ -20,6 +36,7 @@
                 <a href="{% static 'pdf_files/resume.pdf' %}">Resume</a>
             </nav>
         </div>
+
         <br>
         <hr>
         <main>
@@ -29,7 +46,8 @@
             {% endblock %}
         </main>
     </div>
+</body>
     <footer>
         <p>&copy; Isaac Layton 2018.</p>
     </footer>
-</body>
+</html>

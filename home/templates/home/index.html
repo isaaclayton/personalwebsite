@@ -2,6 +2,12 @@
 
 {%load template_extras%}
 
+{% block extra_head %} 
+{% load static %}
+<title> Isaac Layton </title>
+{% endblock %}
+
+
 {% block content %}
 
 {%include_fallback "home/about.html" "utils/blank.html"%}

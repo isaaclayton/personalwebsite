@@ -1,9 +1,34 @@
 {%load template_extras%}
-
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{{ project.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'layouts/projects.css' %}" />
+</head>
+<body>
+    
 {% with "project_files/"|addstr:project.slug|addstr:"/index.html" as project_html%}
 {%include_fallback project_html "utils/blank.html"%}
-{% endwith %}
-
+{% endwith %}  
+    
+</body>
+ <footer>
+     <div class='menu'>
+         <nav>
+             <a href="{% url 'home:index' %}">About</a>
+             <a href="{% url 'projects:project_list' %}">Projects</a>
+             <a href="{% url 'blog:post_list' %}">Blog</a>
+             <a href="{% static 'pdf_files/resume.pdf' %}">Resume</a>
+         </nav>
+     </div>
+     <br/>
+     <p>&copy; Isaac Layton 2018.</p>
+      
+</footer>
+</html>
 {% block ga %}
 {% if GA_TRACKING_ID %}
   {% include "layouts/scripts/ga.html" %}

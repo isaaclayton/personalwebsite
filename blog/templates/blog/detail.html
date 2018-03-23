@@ -2,9 +2,10 @@
 
 {%load template_extras%}
 
-{% block extra_css %} 
+{% block extra_head %} 
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'layouts/jupyter.css' %}" />
+<title>{{post.title}}</title>
+<link rel="stylesheet" type="text/css" href="{% static 'layouts/base.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
 {% endblock %}
 
