@@ -19,14 +19,18 @@ html {
 }
 body {
     margin:15vh 0 8vh 0;
-    padding: 0 25% 0 25%;
+    padding: 0 20% 0 20%;
     text-align: left;
     vertical-align: middle;
     font-family: 'PT Sans', serif;
     line-height: 200%;
-    width: 50%;
+    width: 60%;
     height: 100%;
     min-height: 100%;
+}
+
+.text p {
+    text-indent: 2em;
 }
 
 .menu {
@@ -101,6 +105,28 @@ footer {
 .logo {
     width: 4%;
     height: 4%;
+}
+
+#footnotes {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+/*adapted from https://stackoverflow.com/questions/5793214/creating-programming-code-box-on-my-website-w-xhtml-css*/
+.codebox {
+    border: 1px solid black;
+    background-color: #c5ecf4;
+    width: 90%;
+    overflow: auto;
+    padding: 2%;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.codebox pre {
+    margin: 0;
+    padding: 0;
+    white-space: pre-line;
 }
 
 @media screen and (max-width: 1020px) {
