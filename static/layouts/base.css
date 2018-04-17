@@ -56,6 +56,19 @@ body {
     margin-bottom: 3%;
 }
 
+#big_name a {
+    color: black;
+}
+
+#big_name a:visited {
+    color: black;
+}
+
+#big_name a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 a {
     text-decoration: none;
     color: #6F95B0;
@@ -95,6 +108,10 @@ footer {
     text-align: center;
     vertical-align: middle;
     position: relative;
+}
+
+.social a:hover {
+    text-decoration: none;
 }
 
 .social span {

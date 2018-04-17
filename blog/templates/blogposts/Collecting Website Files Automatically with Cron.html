@@ -1,0 +1,135 @@
+<div class='text'>
+
+    <p>A few months ago, I wanted to know why a swarm of police cars were rushing down the street I was driving on. While I was searching for the reason, I discovered that my local police department puts up a new police report log on their website every Monday through Friday. The previous log is taken down when the current log is put up, so I've been meaning to figure out how to download the log into a folder, with the intent of eventually analyzing the data.</p>
+
+    <p>I learned how to do this a week ago, so I'll let you in on the secret! The process I'm using is to extract police log data, but you could use it to extract any kind of file that is put up daily. </p>
+
+    <h2>Step 1: Find a server</h2>
+
+    <p>While you could end up using your computer to automate the process, you'd be more prone to problems. Your computer would have to be awake at the same time every day for the processes to run. If you have to wake your computer up at the same time every day, it kind of takes away the beauty of automation. You can keep a server running 24/7 if needed.</p>
+
+    <p>This step could have it's own article dedicated to it. There are a lot of different options, such as DigitalOcean droplets and Windows Azure virtual machines. In this article, I'll be using one of Amazon Web Services' EC2 instances. They're what I'm most familiar with and are pretty easy to set up. Plus, if you've never used Amazon Web Services (AWS) before, you get a <a href="https://aws.amazon.com/free/">year of their free tier</a>). To learn how to set up an EC2 instance, you can read AWS' <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">EC2 User Guide</a>.</p>
+
+    <p>The Amazon Machine Image I chose was the "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type". I then chose to make it a t2.nano instance type because downloading a single file every day isn't very intensive, and the t2.nano is the smallest instance that Amazon offers in terms of memory and processing power. As part of the free tier though, you get 750 hours/month free of t2.micro instances. That's 31.25 days, meaning you don't ever have to stop it. Choosing this type might make more sense if this is your only EC2 instance.  Once you have your server activated, you can log into it by following steps 2-4 of <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">these instructions</a>. </p>
+
+    <h2>Step 2: Wget the wdata <sup><a href='#fn1' id='ref1'>1</a></sup></h2>
+
+    <p>Now that the server is up and running, you need to be able to get the desired file from its website to your server from the command line. The command needed for this is "wget". Wget ("web get") is a Linux/Unix command that downloads a file from a given source. The syntax for this is: </p>
+
+    <div class="codebox">
+        <code>
+            user@server:/$ wget www.website.com/file.txt -O log.txt</code>
+    </div>
+
+    <p>The -O is the letter O not the number 0. The reason it's there is so that you can rename the file to what you want to call it (in this example, as <code>log.txt</code>). The filename doesn't have to change, but it'll be helpful for when we want the filename to reflect a different day or revision. If the website putting up the file already specifies a date/revision when putting it up, you could skip this step, although it would be safe to also version it yourself.</p>
+
+     <p>The way that we're going to version it is as follows:</p>
+
+    <div class="codebox">
+        <code>
+            user@server:/$ wget www.website.com/file.txt -O log_$(date +%Y%m%d).txt</code>
+    </div>
+
+    <p><code>$(date +%Y%m%d)</code> is a <a href="http://www.compciv.org/topics/bash/variables-and-substitution/">command substitution</a>, which means that it'll run the <code>date</code> command in the format YYYYMMDD (e.g. 20181231) and append it to the end of our filename.
+
+    <p>We now have a way of getting the data from the website directly into our server. The next step is deciding where to store it. </p>
+
+    <h2>Step 3: Storing the Data</h2>
+
+    <p>If your server has a lot of storage and the files you're collecting are small, you could just keep the files on your server. If you choose to do this and use the server for other purposes, you should store them in a folder with an appropriate name. The command <code>mkdir foldername</code> will create the folder. Instead of using <code>wget</code> to put the file at <code>filename.txt</code>, put it at <code>foldername/filename.txt</code>.</p>
+
+    <p>The EC2 server I was using didn't have a lot of storage, so I needed to find a different solution. I decided to transfer the files using an S3 bucket. S3 is another service that AWS offers specifically for storage purposes. You can read about setting an S3 bucket up using <a href="https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">these instructions</a>. There are a lot of different customizations for S3 buckets, but the default settings will be fine.</p>
+
+    <p>Once your S3 bucket is set up, you'll need to download the <a href='https://aws.amazon.com/cli/'>AWS Command Line Interface (CLI)</a>. This will allow you to access your S3 bucket from the command line. To download the AWS CLI, execute the following commands:</p>
+
+    <div class="codebox">
+        <code><pre>
+        user@server:/$ sudo apt-get update && sudo apt-get -y upgrade
+        user@server:/$ sudo apt-get install python-pip
+        user@server:/$ pip install awscli --upgrade --user</pre></code>
+    </div>
+    
+    <p>The AWS CLI needs to be configured so that it knows to use your AWS account. To start with, you'll need to create an IAM user for your AWS account. The instructions for doing that <a href='https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html'>are here</a>. Give the user programmatic access and under permissions give it "AmazonS3FullAccess". Once created, follow the instructions <a href='https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html'>here</a> to create a access key ID and secret access key for your IAM user and finish the configuration. </p>
+    
+    <p>You now have everything in place to transfer the file from your server to your S3 bucket. The command for doing this will be:</p>
+    
+    <div class='codebox'>
+        <code>
+            user@server:/$ aws s3 cp log_$(date +%Y%m%d).txt s3://yourBucketName
+        </code>
+    </div>
+    
+    <p>The <code>s3 cp</code> function is used to copy files from your directory to the specified bucket. If you check your S3 bucket after running this, you should see the file!</p>
+    
+    <h2>Step 4: Automating the Process</h2>
+    
+    <p>Now that we've managed to download the data and store it appropriately, it's time to make the server do it on its own. The way we're going to do this is by using cron. <a href='http://www.unixgeeks.org/security/newbie/unix/cron-1.html'>Cron</a> is a command line program used to schedule tasks. To use cron, you're going to edit your configuration file, known as crontab. Entering <code>crontab -e</code> will open the file to be edited. The syntax for each automated command or "cron job" is as follows:</p>
+    
+    <div class='codebox'>
+        <code><pre class='cron'>
+        <span class='cron'></span><i>your command</i>
+        </pre></code>
+    </div>
+    
+    <p>If you hover over each asterisk, you can see what time value it represents. If you don't use a value, you can leave it as an asterisk. The values can be ranges as well, using a hyphen to signify a range. For example, <br/> <code>00 23 * * 1-5 echo "hi"</code> would print "hi" Monday through Friday at 23:00 (11:00pm) UTC time. </p>
+    
+    <p>We're going to use cron to execute 3 tasks:</p>
+    <ol>
+        <li>We're going to retrieve the data like we did in Step 2.</li>
+        <li>We're going to store the data like we did in Step 3.</li>
+        <li>We're going to delete the file off of the server to save space (this command isn't needed if you opted to keep the files on your server).</li>
+    </ol>
+    <p>When we put all of these together in the crontab file, it's going to look like this:</p>
+    
+    <div class="codebox">
+        <code><pre>
+        00 23 * * 1-5 /usr/bin/wget www.website.com/file.txt -O log_$(date +\%Y\%m\%d).txt
+        01 23 * * 1-5 .local/bin/aws s3 cp log_$(date +\%Y\%m\%d).txt s3://yourBucket
+        02 23 * * 1-5 rm log_$(date +\%Y\%m\%d).txt</pre></code>
+    </div>
+    
+    <p>There are a few things to note about this:</p>
+    <ul>
+        <li>We used <code>/usr/bin/wget</code> and <code>.local/bin/aws</code> instead of just <code>wget</code> and <code>aws</code>. Cron needs absolute pathnames so that it knows where to find the program. To find out where your programs are located, use the command <code>which programName</code> and it will give you the absolute pathname. If it starts with something like /home/user/, disregard that section of the pathname because the crontab file you're using is already associated with your user.</li>
+        <li>There are backslashes before the percent signs in the date section of the output file's name. This is because cron uses the percent sign to mean a new line. The backslashes will let us escape this interpetation.</li>
+        <li>We could've put these commands into a <a href='https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php'>bash script</a>, but since there are only 3 lines, it felt unnecessary.</li>
+        <li>I decided to separate the commands by a minute each, but using the <a href='https://stackoverflow.com/questions/4510640/what-is-the-purpose-of-in-a-shell-command'>'&&' syntax</a> of running the commands sequentially would have also worked. </li>
+    </ul>
+    
+</div>
+
+<div id='footnotes'>
+<sup id='fn1'>1. This is a bad wget joke, there's no such thing as wdata as far as I'm aware. There's also no such thing as a good wget joke.<a href='#ref1' title='Get back to reading'>↩</a></sup>
+</div>
+
+<script>
+    const arr = ['minute (0 - 59)', 'hour (0-23)', 'day of the month (1-31)', 'month (1-12)', 'day of the week (0-6 with 6 being Sunday)'];
+    let div = d3.select('pre.cron').append('div')
+            .attr('class', 'tooltip')
+            .style('opacity', 0)
+            .style('height', '25px');
+    d3.select('span.cron').selectAll('span.options')
+        .data(arr)
+        .enter()
+        .append('span')
+        .attr('class', 'options')
+        .text((d)=>'*')
+        .style('padding-left', (d,i)=>i==0 ? '0px' : '10px')
+        .style('padding-right', (d,i)=>i==4 ? '20px' : '10px')
+    d3.selectAll('span.options')
+        .on('mouseover', mouseover)
+        .on('mouseout', mouseout)
+    
+    function mouseover(d,i) {
+        div.style('opacity', .9)
+        div.transition().duration(200);
+        div.html(d)
+        div.style('padding-left', i*30 + 'px')
+    }
+    
+    function mouseout() {
+        div.transition()
+            .duration(500)
+            .style('opacity',0)
+    }
+</script>
