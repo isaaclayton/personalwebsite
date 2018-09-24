@@ -13,7 +13,11 @@
         <ul>
         {% for project in latest_project_list %}
             <li>
-                <h3><a href="{% url 'projects:project' project.slug%}"> {{ project.title }} </a></h3>
+                {% if project.external_link == None %}
+                    <h3><a href="{% url 'projects:project' project.slug%}"> {{ project.title }} </a></h3>
+                {% else %}
+                    <h3><a href={{ project.external_link }} target='_blank'> {{ project.title }} </a></h3>
+                {% endif %}
                 <p class='pub_date'> {{ project.get_date }} </p>
             </li>
         {% endfor %}

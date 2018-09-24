@@ -21,13 +21,25 @@ class Post(models.Model):
     def get_date(self):
         time = datetime.now()
         if self.pub_date.day == time.day:
-            return str(time.hour - self.pub_date.hour) + " hours ago"
+            if (time.hour - self.pub_date.hour)==1:
+                return str(time.hour - self.pub_date.hour) + " hour ago"
+            else:
+                return str(time.hour - self.pub_date.hour) + " hours ago"
         else:
             if self.pub_date.month == time.month:
-                return str(time.day - self.pub_date.day) + " days ago"
+                if (time.day - self.pub_date.day)==1:
+                    return str(time.day - self.pub_date.day) + " day ago"
+                else:
+                    return str(time.day - self.pub_date.day) + " days ago"
             else:
                 if self.pub_date.year == time.year:
-                    return str(time.month - self.pub_date.month) + " months ago"
+                    if (time.month - self.pub_date.month)==1:
+                        return str(time.month - self.pub_date.month) + " month ago"
+                    else:
+                        return str(time.month - self.pub_date.month) + " months ago"
                 else:
-                    return str(time.year - self.pub_date.year) + " years ago"
+                    if (time.year - self.pub_date.year)==1:
+                        return str(time.year - self.pub_date.year) + " year ago"
+                    else:
+                        return str(time.year - self.pub_date.year) + " years ago"
         return self.pub_date

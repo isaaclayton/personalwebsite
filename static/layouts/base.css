@@ -129,6 +129,10 @@ footer {
     margin-bottom: 5vh;
 }
 
+.errorlist {
+  display: none;
+}
+
 /*adapted from https://stackoverflow.com/questions/5793214/creating-programming-code-box-on-my-website-w-xhtml-css*/
 .codebox {
     border: 1px solid black;

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'utils',
     'home',
     'projects',
+    'contactpage',
     #Start standard installed apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,6 +93,13 @@ DATABASES = {
         'PASSWORD': os.environ['PASSWORD_SETTING']
     },
 }
+
+# Email settings
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 # Password validation

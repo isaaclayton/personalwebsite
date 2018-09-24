@@ -7,9 +7,10 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     author = models.ForeignKey(User, models.CASCADE)
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=40)
+    slug = models.SlugField(max_length=40, blank=True, null=True)
     #body = "/blogposts/{}.html".format(title)
     pub_date = models.DateTimeField(blank=True, null=True)
+    external_link = models.CharField(blank=True, null=True, max_length=200)
 
     def publish(self):
         self.pub_date = timezone.now()
@@ -21,13 +22,25 @@ class Project(models.Model):
     def get_date(self):
         time = datetime.now()
         if self.pub_date.day == time.day:
-            return str(time.hour - self.pub_date.hour) + " hours ago"
+            if (time.hour - self.pub_date.hour)==1:
+                return str(time.hour - self.pub_date.hour) + " hour ago"
+            else:
+                return str(time.hour - self.pub_date.hour) + " hours ago"
         else:
             if self.pub_date.month == time.month:
-                return str(time.day - self.pub_date.day) + " days ago"
+                if (time.day - self.pub_date.day)==1:
+                    return str(time.day - self.pub_date.day) + " day ago"
+                else:
+                    return str(time.day - self.pub_date.day) + " days ago"
             else:
                 if self.pub_date.year == time.year:
-                    return str(time.month - self.pub_date.month) + " months ago"
+                    if (time.month - self.pub_date.month)==1:
+                        return str(time.month - self.pub_date.month) + " month ago"
+                    else:
+                        return str(time.month - self.pub_date.month) + " months ago"
                 else:
-                    return str(time.year - self.pub_date.year) + " years ago"
+                    if (time.year - self.pub_date.year)==1:
+                        return str(time.year - self.pub_date.year) + " year ago"
+                    else:
+                        return str(time.year - self.pub_date.year) + " years ago"
         return self.pub_date

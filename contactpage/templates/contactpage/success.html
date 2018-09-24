@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block extra_head %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<h3>Thanks for sending me a message! I'll try to respond to it promptly.</h3>
+
+{% endblock %}
+
+{% block ga %}
+{% if GA_TRACKING_ID %}
+  {% include "layouts/scripts/ga.html" %}
+{% endif %}
+{% endblock %}

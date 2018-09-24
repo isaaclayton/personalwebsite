@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+
+{% block extra_head %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<h1>Contact Me!</h1>
+<p>Let me know if you have questions about anything. I'd be happy to help. </p>
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <div class="form-actions">
+      <button type="submit">Send</button>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block ga %}
+{% if GA_TRACKING_ID %}
+  {% include "layouts/scripts/ga.html" %}
+{% endif %}
+{% endblock %}
